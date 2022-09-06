@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-
+  post '/login', to: "sessions#create"
+  destroy '/logout', to: "sessions#destroy"
   get '/hello', to: "application#hello_world"
 end
