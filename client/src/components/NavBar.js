@@ -1,7 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
-function NavBar(){
+
+function NavBar({setUser}){
+  const history = useHistory()
+
+  function handleLogout(){
+    fetch('/logout', {
+      method:"DELETE"
+    })
+    .then((r)=>{
+      if(r.ok){
+        setUser(null);
+      }
+    });
+    history.push('/welcome')
+  }
 
   return(
     <div>
@@ -48,19 +62,10 @@ function NavBar(){
             Login Page
           </button>
         </NavLink>
-      
-        <NavLink
-        to="/logout"
-        activeStyle={{
-          background: "darkblue",
-        }}
-        >
-          <button type="button">
-            Logout
-        </button>
 
-        </NavLink>
-
+        <header>
+          <button onClick={handleLogout}>Logout</button>
+        </header>
 
     </div>
   )

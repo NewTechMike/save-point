@@ -31,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
+        <NavBar setUser={setUser}/>
         <Switch>
           <Route path="/signup">
             <SignUp setUser={setUser}/>

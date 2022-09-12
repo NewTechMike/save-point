@@ -19,7 +19,7 @@ function Login({setUser}){
       if(r.ok) { 
         r.json().then((user) => setUser(user));
         setTimeout (() => {
-          history.push('/me');
+          history.push('/home');
         }, 500);
       } else {
         r.json().then((errorData) => setErrors(errorData.error))
