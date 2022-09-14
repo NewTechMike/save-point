@@ -32,7 +32,7 @@ class GamesController < ApplicationController
 
   def destroy
     this_game.destroy
-    head: no_content
+    head :no_content
   end
 
   private
