@@ -20,11 +20,10 @@ function Games(){
       </li>
     )
   
+    const [title, setTitle] = useState()
     function handleSomething(){
     const gameObj = {
-      title: title, 
-      platform: platform, 
-      genre: genre
+      title: title
     }  
     fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791', {
 
@@ -41,7 +40,7 @@ function Games(){
     <div>
       <h1>Games Page</h1>
       <ul>{theGames}</ul>
-      
+      <button onClick={handleSomething}>Something</button>
     </div>
   )
 }
