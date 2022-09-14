@@ -6,7 +6,7 @@ import SignUp from './SignUp';
 import Welcome from "./Welcome";
 import Home from './Home';
 import Login from './Login';
-
+import Games from './Games';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -44,6 +44,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/games">
+            <Games />
           </Route>
         </Switch>
       </div>

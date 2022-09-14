@@ -40,6 +40,16 @@ function NavBar({setUser}){
       </NavLink>
       
       <NavLink
+        to="/games"
+        activeStyle={{
+          background: "darkblue",
+        }}>
+        <button type="button">
+          Games
+        </button>
+      </NavLink>
+      
+      <NavLink
         to="/login"
         activeStyle={{
           background: "darkblue",
