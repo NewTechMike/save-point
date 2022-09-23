@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { UserContext } from '../context/user'
 
 
-function NavBar({setUser}){
+function NavBar(){
   const history = useHistory()
+  const { user, setUser } = useContext(UserContext);
 
   function handleLogout(){
     fetch('/logout', {
@@ -14,7 +16,7 @@ function NavBar({setUser}){
         setUser(null);
       }
     });
-    history.push('/welcome')
+    history.push('/login')
   }
 
   return(

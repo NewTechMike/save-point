@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from '../context/user'
 
 function Games(){
+  const { user, setUser } = useContext(UserContext);
+  console.log("G User: ", user)
 
   const [gameList, setGameList ] = useState([]) 
     useEffect(()=>{
@@ -63,7 +66,7 @@ function Games(){
     console.log(rawgGames)
   return (
     <div>
-      <h1>Games Page</h1>
+      <h1>Welcome to the Games Page, {user.username}</h1>
       <ul>{theGames}</ul>
       
       <button onClick={handleSomething}>Something</button>

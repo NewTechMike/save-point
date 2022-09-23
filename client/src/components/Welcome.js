@@ -3,13 +3,13 @@ import {UserContext} from "../context/user";
 
 function Welcome(){
 
-  const user = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
 
-  console.log("W UserContext: ", UserContext)
+  //console.log("W UserContext: ", UserContext)
   console.log("W User: ", user)
 
   return(
-    <div>This is the Welcome Page, {user}</div>
+    <div>This is the Welcome Page, {user.username}</div>
   )
 }
 
