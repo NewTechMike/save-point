@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext} from "react";
-//import './App.css'
 import { BrowserRouter, Switch, Route} from "react-router-dom";
 import NavBar from "./NavBar";
 import SignUp from './SignUp';
@@ -7,24 +6,19 @@ import Welcome from "./Welcome";
 import Home from './Home';
 import Login from './Login';
 import Games from './Games';
-
-import { UserProvider, UserContext } from "../context/user";
-
-//const UserContext = createContext("");
+import Users from './Users';
+import { UserContext } from "../context/user";
 
 function App() {
-  const [count, setCount] = useState(0);
+  //const [count, setCount] = useState(0);
   const {user, setUser} = useContext(UserContext);
-  console.log("?: ", user)
 
-
+/* 
   useEffect(() => {
     fetch("/hello")
     .then((r) => r.json())
     .then((data) => setCount(data.count));
-  }, []);
-  
-  console.log("A1: ", user)
+  }, []); */
   
   useEffect(() => {
     fetch("/me")
@@ -34,8 +28,6 @@ function App() {
       }
     });
   }, [])
-
-  console.log("A2: ", user)
 
   return (
    
@@ -57,6 +49,9 @@ function App() {
           </Route>
           <Route path="/games">
             <Games />
+          </Route>
+          <Route path="/users">
+            <Users />
           </Route>
         </Switch>
       </div>

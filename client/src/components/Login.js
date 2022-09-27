@@ -8,6 +8,7 @@ function Login(){
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
+  const [loggedIn, setLoggedIn] = useState(false)
   const { user, setUser } = useContext(UserContext);
 
   function handleSubmit(e){
@@ -21,6 +22,7 @@ function Login(){
     }).then((r) => {
       if(r.ok) { 
         r.json().then((user) => setUser(user));
+        setLoggedIn(true)
         setTimeout (() => {
           history.push('/home');
         }, 500);

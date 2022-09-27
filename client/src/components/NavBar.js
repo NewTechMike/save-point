@@ -50,6 +50,16 @@ function NavBar(){
           Games
         </button>
       </NavLink>
+
+      <NavLink
+        to="/users"
+        activeStyle={{
+            background: "darkblue",
+        }}>
+        <button type="button">
+          Users
+        </button>
+      </NavLink>
       
       <NavLink
         to="/login"
