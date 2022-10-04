@@ -5,7 +5,7 @@ import { UserContext } from '../context/user'
 
 function NavBar(){
   const history = useHistory()
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleLogout(){
     fetch('/logout', {
@@ -16,6 +16,7 @@ function NavBar(){
         setUser(null);
       }
     });
+    setLoggedIn(false)
     history.push('/login')
   }
 
@@ -60,7 +61,7 @@ function NavBar(){
           Users
         </button>
       </NavLink>
-      
+
       <NavLink
         to="/login"
         activeStyle={{

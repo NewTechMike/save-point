@@ -11,8 +11,9 @@ import { UserContext } from "../context/user";
 
 function App() {
   //const [count, setCount] = useState(0);
-  const {user, setUser} = useContext(UserContext);
+  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
 
+  console.log("A Logged: ", loggedIn)
 /* 
   useEffect(() => {
     fetch("/hello")
@@ -20,14 +21,18 @@ function App() {
     .then((data) => setCount(data.count));
   }, []); */
   
-  useEffect(() => {
+  /* useEffect(() => {
     fetch("/me")
     .then((r) => {
       if(r.ok){
         r.json().then((user) => setUser(user.username));
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
       }
     });
-  }, [])
+  }, []) */
+  console.log("A: ", loggedIn)
 
   return (
    
@@ -36,7 +41,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route path="/signup">
-            <SignUp user={user} />
+            <SignUp />
           </Route>
           <Route path="/welcome">
             <Welcome />
@@ -51,7 +56,7 @@ function App() {
             <Games />
           </Route>
           <Route path="/users">
-            <Users />
+            <Users loggedIn={loggedIn}/>
           </Route>
         </Switch>
       </div>

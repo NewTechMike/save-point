@@ -5,12 +5,12 @@ function Home(){
   const {user, setUser} = useContext(UserContext);
   console.log("H User: ", user)
 
-  useEffect(()=>{
+  /* useEffect(()=>{
     fetch('/me')
     .then((r)=>r.json())
     .then((user) => setUser(user))
-  }, [])
-  console.log(user.username)
+  }, []) */
+  console.log("H: ", user.username)
   
   return(
     <div>
