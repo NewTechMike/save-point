@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  resources :game_lists
+  resources :lists
   resources :user_games
   resources :games
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  patch '/me', to: "users#create_loc_and_bio"
   # Defines the root path route ("/")
   # root "articles#index"
   get '/me', to: "users#show"

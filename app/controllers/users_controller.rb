@@ -23,6 +23,21 @@ class UsersController < ApplicationController
     end
   end 
 
+  def create_loc_and_bio
+    user = User.find_by(id: session[:user_id])
+    byebug
+    if user
+      lab = user.update(location: params[:location], bio: params[:bio])
+      render json: update, status: :created
+    else 
+      render json: {"Not Authorized"}, status: :unauthorized
+    end 
+  end 
+
+  def show_loc_and_bio
+    
+  end 
+
   private
 
   def user_params
