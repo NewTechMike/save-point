@@ -30,13 +30,14 @@ function Games(){
       title: title
     }  
 
-    const [rawgGames, setRawgGames]= useState({
+    const [rawgGames, setRawgGames]= useState([{
       title: "", 
       platform: "",
       release_date: "",
-      genre: "",
+      genres: [],
       cover_art: ""
-    })
+    }])
+
     useEffect(()=>{ 
       fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
         .then((r)=> r.json())
@@ -47,18 +48,16 @@ function Games(){
       //genre: gameData.Results[8].genres[0],
      // cover_art: gameData.results[8].background_image
           ))
-          
-        
     },[])
         
         console.log("RG: ", rawgGames)
-       /* const theRawgGames = rawgGames.map((rawgData) => 
-        <li key={rawgData.id}>
-          <ul>{rawgData.name}</ul>   
-          <ul>{rawgData.genres.name}</ul>
+        const theRawgGames = rawgGames.map((rawgData) => 
+        <ul key={rawgData.id}>
+          <li>{rawgData.name}</li>   
+          <li>{rawgData.genres.name}</li>
          
-        </li>
-      ) */
+        </ul>
+      ) 
         
     //<img src= {rawgData.short_screenshots[0].image} />
       
@@ -78,7 +77,7 @@ function Games(){
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>
       <ul>{theGames}</ul>
-     
+     <ul>{theRawgGames}</ul>
       <button onClick={handleSomething}>Something</button>
     </div>
   )
