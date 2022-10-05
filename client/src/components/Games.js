@@ -13,72 +13,58 @@ function Games(){
     },[])
 
     const theGames =  gameList.map((gameItem) =>
-      <li key={gameItem.id}>
+      <ul key={gameItem.id}>
         <img src={gameItem.cover_art} />
-        <ul>{gameItem.title} </ul>
-        <ul> Platform: {gameItem.platform}</ul>
-        <ul> Release Date: {gameItem.release_date}</ul>
-        <ul> Genre: {gameItem.genre}</ul>
-      </li>
+        <li>{gameItem.title} </li>
+        <li> Platform: {gameItem.platform}</li>
+        <li> Release Date: {gameItem.release_date}</li>
+        <li> Genre: {gameItem.genre}</li>
+        <button onClick={handleSomething}>Something1</button>
+        <button onClick={handleSomething}>Something2</button>
+        <button onClick={handleSomething}>Something3</button>
+      </ul>
     )
   
-    const [title, setTitle] = useState()
-    function handleSomething(){
-      console.log("something")
+    function handleSomething(e){
+      console.log("something", e)
     }
-    const gameObj = {
-      title: title
-    }  
 
     const [rawgGames, setRawgGames]= useState([{
       title: "", 
-      platform: "",
+      platform: [{}],
       release_date: "",
-      genres: [],
+      genres: [{}],
       cover_art: ""
     }])
 
     useEffect(()=>{ 
       fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
         .then((r)=> r.json())
-        .then((gameData)=>setRawgGames(
-          gameData.results
-      //platform: gameData.results[8].parent_platform[1],
-      //release_date: gameData.results[8].release_date,
-      //genre: gameData.Results[8].genres[0],
-     // cover_art: gameData.results[8].background_image
-          ))
+        .then((gameData) => setRawgGames(gameData.results))
     },[])
         
-        console.log("RG: ", rawgGames)
-        const theRawgGames = rawgGames.map((rawgData) => 
+    console.log("RG: ", rawgGames)
+    //console.log("RG Platform: ", rawgGames[0].parent_platforms[0].platform.name)
+    const theRawgGames = rawgGames.map((rawgData, index) => 
         <ul key={rawgData.id}>
+          <img src={rawgData.background_image} style={{width: "75%", height: "75%"}}/>
           <li>{rawgData.name}</li>   
-          <li>{rawgData.genres.name}</li>
-         
+          <li>Platform: {rawgData.parent_platforms[0].platform.name}</li>
+          <li>/ {rawgData.parent_platforms[1].platform.name}</li>
+          <li>Release Date: {rawgData.released}</li>
+          <li>Genre: {rawgData.genres[0].name}</li>
+          <button onClick={handleSomething(rawgData.name)}>Something1</button>
+          <button onClick={handleSomething}>Something2</button>
+          <button onClick={handleSomething}>Something3</button>
+    
         </ul>
-      ) 
-        
-    //<img src= {rawgData.short_screenshots[0].image} />
-      
-      /*  <ul>{rawgData.genres[0].name}</ul>
-          <ul>{rawgData.released}</ul>
-          <ul>{rawgData.parent_platforms[0].platform.name}</ul>
-      */
-    console.log(rawgGames)
+      );
 
-    /**!!! 
-     * Currently Running into an issue where the api fetch
-     * seems to be taking longer than the const + Map assigment
-     * data is unable to render unless the page is refreshed ...
-     * sometimes
-     */
   return (
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>
       <ul>{theGames}</ul>
-     <ul>{theRawgGames}</ul>
-      <button onClick={handleSomething}>Something</button>
+      <ul>{theRawgGames}</ul>
     </div>
   )
 }
