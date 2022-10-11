@@ -3,14 +3,19 @@ import {UserContext} from "../context/user";
 
 function Welcome(){
 
-  const {user, setUser} = useContext(UserContext);
+  const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   //console.log("W UserContext: ", UserContext)
   console.log("W User: ", user)
 
-  return(
-    <div>This is the Welcome Page, {user.username}</div>
-  )
+  if(loggedIn){
+  return( 
+    <div>Welcome back, {user.username}</div>
+  )} else{
+    return(
+      <div>Welcome to Save Point. Please Login or Sign Up</div>
+    )
+  }
 }
 
 export default Welcome;

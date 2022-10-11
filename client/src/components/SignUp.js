@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from '../context/user'
 
-function SignUp ({setUser}){
+function SignUp (){
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([])
   const history = useHistory();
+
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleSubmit(e){
     e.preventDefault()
@@ -28,15 +31,14 @@ function SignUp ({setUser}){
         setTimeout (()=>{
           history.push('/home');
         }, 500);
-        //FUTURE SELF: The above code is to
-        //take user to their Home page after
-        //Sign Up
-      } else{
+      } else {
         r.json().then((errorData)=> setErrors(errorData.errors))
       }
     })
   }
-
+  console.log("errors: ", errors)
+  
+  if(!loggedIn){
   return(
     <div>
       Welcome to SignUp Page
@@ -72,17 +74,22 @@ function SignUp ({setUser}){
              onChange={(e)=> setPasswordConfirmation(e.target.value)}
            /><br/>
         {errors.length > 0 && (
-          <ul style={{color: "red"}}>
-            {errors.map((error)=>(
-              <li key={error}>{error}</li>
-              ))}
-          </ul>
-        )}
+        <ul style={{color: "red"}}>
+          {errors.map((error)=>(
+            <li key={error}>{error}</li>
+            ))}
+        </ul>
+      )}
         <button type="submit">Submit</button>
         </form>
       </div>
     </div>
-  )
+  )} else {  
+  return (
+    <div style={{color: "orange"}}>
+      You have already Signed up and are currently Logged In, {user.username}
+    </div>
+  )}
 }
 
 export default SignUp;

@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../context/user'
+import { useHistory } from 'react-router-dom';
 
 function Home(){
-  const {user, setUser} = useContext(UserContext);
-  console.log("H User: ", user)
+  const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const history = useHistory();
 
+  if(loggedIn){
   return(
     <div>
-      Home Page, { user.username }
+      Welcome to your Home Page, { user.username }
     </div>
+  )} else (
+    history.push('/welcome')
   )
 }
 

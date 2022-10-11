@@ -8,8 +8,7 @@ function Login(){
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
-  const [loggedIn, setLoggedIn] = useState(false)
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleSubmit(e){
     e.preventDefault();
@@ -32,7 +31,9 @@ function Login(){
     });
   }
 
+  console.log("Login Err: ", errors)
 
+if(!loggedIn){
   return(
     <div>
       Login Page
@@ -57,17 +58,22 @@ function Login(){
           onChange={(e) => setPassword(e.target.value)}
           /> <br/>
 
-        {errors.length > 0 && (
-          <ul style={{color: "red"}}>
-            {errors.map((error)=>(
-              <li key={error}>{error}</li>
-              ))}
-          </ul>
-        )}
+      {errors.length > 0 && (
+        <ul style={{color: "red"}}>
+          
+            <li key={errors}>{errors}</li>
+            
+        </ul>
+      )}
+  
           <button type="submit">Login</button>
       </form>
     </div>
-  )
+  )} else {
+    return(
+      <div style={{color: "orange"}}>You are already Logged In</div>
+    )
+  }
 }
 
 export default Login;

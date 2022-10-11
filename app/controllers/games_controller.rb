@@ -5,7 +5,7 @@ class GamesController < ApplicationController
     if game
       render json: game, status: :created
     else
-      render json: { error: game.erros.full_messages }, status: :unprocessable_entity
+      render json: { error: game.errors.full_messages }, status: :unprocessable_entity
     end 
   end 
 

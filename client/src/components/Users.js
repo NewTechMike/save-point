@@ -1,17 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { UserContext } from '../context/user'
 
-function Users({loggedIn}){
+function Users(){
 
   const [users, setUsers] = useState([])
-  const {user, setUser} = useContext(UserContext);
-
-  console.log("U: ", loggedIn)
-
-  const currentUser = (() =>{
-    if(loggedIn === true)
-    return <text>You are logged in</text>
-  })
+  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
 
   useEffect(()=>{
     fetch('/users')
@@ -23,14 +16,18 @@ function Users({loggedIn}){
      <li key={userData.id}>{userData.username}</li>
   )
 
+  if(loggedIn){
   return(
     <div>Hey {user.username}, This is the Users page
-      <h1>{currentUser}</h1>
-    
       <ul>{ListOfUsers}</ul>
     
     </div>
-  )
+  )} else {
+    return(
+    <div>This is the Users page
+      <ul>{ListOfUsers}</ul>
+    </div>
+  )}
 }
 
 export default Users;
