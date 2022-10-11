@@ -44,13 +44,12 @@ function Games(){
     }
   
     console.log("RG: ", rawgGames)
-    //console.log("RG Platform: ", rawgGames[0].parent_platforms[0].platform.name)
     const [theRawgGames, setTheRawgGames] = useState([]);
     useEffect(()=>{
     
       setTimeout (() => {
    
-       setTheRawgGames(rawgGames.map((rawgData, index) => 
+       setTheRawgGames(rawgGames.map((rawgData) => 
         <ul key={rawgData.id}>
           <img src={rawgData.background_image} style={{width: "75%", height: "75%"}}/>
           <li>{rawgData.name}</li>   
@@ -63,9 +62,9 @@ function Games(){
           <button onClick={handleSomething}>Something3</button>
         </ul>)) 
    
-      },250) 
+      },25) 
     
-    }, [])
+    }, [rawgGames])
 
   console.log("RG L: ", rawgGames.length)
        
