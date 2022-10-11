@@ -2,9 +2,23 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
 
 function Games(){
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
   const [gameList, setGameList ] = useState([]) 
   console.log("G User: ", user)
+
+  const [rawgGames, setRawgGames]= useState([{
+    title: "", 
+    platform: [""],
+    release_date: "",
+    genres: [""],
+    cover_art: ""
+  }])
+
+  useEffect(()=>{ 
+    fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
+      .then((r)=> r.json())
+      .then((gameData) => setRawgGames(gameData.results))
+  },[])
 
     useEffect(()=>{
       fetch('/games')
@@ -28,24 +42,15 @@ function Games(){
     function handleSomething(e){
       console.log("something", e)
     }
-
-    const [rawgGames, setRawgGames]= useState([{
-      title: "", 
-      platform: [{}],
-      release_date: "",
-      genres: [{}],
-      cover_art: ""
-    }])
-
-    useEffect(()=>{ 
-      fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
-        .then((r)=> r.json())
-        .then((gameData) => setRawgGames(gameData.results))
-    },[])
-        
+  
     console.log("RG: ", rawgGames)
     //console.log("RG Platform: ", rawgGames[0].parent_platforms[0].platform.name)
-    const theRawgGames = rawgGames.map((rawgData, index) => 
+    const [theRawgGames, setTheRawgGames] = useState([]);
+    useEffect(()=>{
+    
+      setTimeout (() => {
+   
+       setTheRawgGames(rawgGames.map((rawgData, index) => 
         <ul key={rawgData.id}>
           <img src={rawgData.background_image} style={{width: "75%", height: "75%"}}/>
           <li>{rawgData.name}</li>   
@@ -56,10 +61,15 @@ function Games(){
           <button onClick={handleSomething(rawgData.name)}>Something1</button>
           <button onClick={handleSomething}>Something2</button>
           <button onClick={handleSomething}>Something3</button>
+        </ul>)) 
+   
+      },250) 
     
-        </ul>
-      );
+    }, [])
 
+  console.log("RG L: ", rawgGames.length)
+       
+  console.log("TRG: ", theRawgGames)
   return (
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>

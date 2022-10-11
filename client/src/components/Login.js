@@ -31,8 +31,6 @@ function Login(){
     });
   }
 
-  console.log("Login Err: ", errors)
-
 if(!loggedIn){
   return(
     <div>

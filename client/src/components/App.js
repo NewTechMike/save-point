@@ -32,11 +32,10 @@ function App() {
       }
     });
   }, []) */
-  console.log("A: ", loggedIn)
 
   return (
    
-    <BrowserRouter>
+   
       <div className="App">
         <NavBar />
         <Switch>
@@ -61,7 +60,6 @@ function App() {
         </Switch>
       </div>
 
-    </BrowserRouter>
     
   );
 }

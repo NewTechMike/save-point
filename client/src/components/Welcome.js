@@ -5,7 +5,6 @@ function Welcome(){
 
   const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
-  //console.log("W UserContext: ", UserContext)
   console.log("W User: ", user)
 
   if(loggedIn){
