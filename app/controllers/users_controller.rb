@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
+  
   def show
-    #user = User.find_by(id: session[:user_id])
-    
+    #byebug
     if current_user
       render json: current_user
     else 
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end 
 
   def index
+    #byebug
     render json: User.all
   end 
 
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
   def update
     #user = User.find_by(id: session[:user_id])
     
-    byebug
+    #byebug
     if current_user
       lab = current_user.update(location: params[:location], bio: params[:bio])
       render json: lab, status: :created
@@ -43,7 +44,7 @@ class UsersController < ApplicationController
   end 
 
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    params.permit(:username, :password, :password_confirmation, :location, :bio)
   end 
 
   def render_record_invalid_response(e)

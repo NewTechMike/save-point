@@ -22,7 +22,27 @@ class ListsController < ApplicationController
     else
       render json: { "Not Found"}, status: :not_found
     end 
-    
   end 
+
+ def add_game_to_list
+  list = List.find_by(id: params[:list_id])
+  game = Game.find_by(id: params[:game_id])
+  if list && game
+    list.games << game
+    render json: list.games, status: :added
+  else
+    render json: {errors: "Not found"}, status: :not_found
+  end
+end
+
+def show_games_in_list
+  list = List.find_by(id: params[:list_id])
+  game = Game.find_by(id: params[:game_id])
+  if list && game
+    render json: list.games
+  else
+    render json: {errors: "Not found"}, status: :not_found
+  end
+end
 
 end

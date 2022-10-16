@@ -18,6 +18,8 @@ function UserProvider({children}){
       }
     });
   }, [])
+
+
   return (
   <UserContext.Provider value={{user, setUser, loggedIn, setLoggedIn}}>
     {children}

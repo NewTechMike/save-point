@@ -28,14 +28,14 @@ function Games(){
 
     const theGames =  gameList.map((gameItem) =>
       <ul key={gameItem.id}>
-        <img src={gameItem.cover_art} />
+        <img src={gameItem.cover_art} style={{width: "75%", height: "75%"}}/>
         <li>{gameItem.title} </li>
         <li> Platform: {gameItem.platform}</li>
         <li> Release Date: {gameItem.release_date}</li>
         <li> Genre: {gameItem.genre}</li>
-        <button onClick={handleSomething}>Something1</button>
-        <button onClick={handleSomething}>Something2</button>
-        <button onClick={handleSomething}>Something3</button>
+        <button onClick={handleSomething}>Want to Play</button>
+        <button onClick={handleSomething}>Started Playing</button>
+        <button onClick={handleSomething}>To Replay</button>
       </ul>
     )
   
@@ -57,9 +57,9 @@ function Games(){
           <li>/ {rawgData.parent_platforms[1].platform.name}</li>
           <li>Release Date: {rawgData.released}</li>
           <li>Genre: {rawgData.genres[0].name}</li>
-          <button onClick={handleSomething(rawgData.name)}>Something1</button>
-          <button onClick={handleSomething}>Something2</button>
-          <button onClick={handleSomething}>Something3</button>
+          <button onClick={handleSomething(rawgData.name)}>Want to Play</button>
+          <button onClick={handleSomething}>Started Playing</button>
+          <button onClick={handleSomething}>To Replay</button>
         </ul>)) 
    
       },25) 

@@ -13,6 +13,11 @@
   }
 }
 
+.img {
+  width: "75%"; 
+  height: "75%"
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
