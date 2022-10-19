@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
-  
+  #skip_before_action :authorize, only: [:create]
+
   def show
-    #byebug
     if current_user
+      #byebug
       render json: current_user
     else 
       render json: { error: "Not Authorized"}, status: :unauthorized  
@@ -11,7 +12,6 @@ class UsersController < ApplicationController
   end 
 
   def index
-    #byebug
     render json: User.all
   end 
 
@@ -26,12 +26,12 @@ class UsersController < ApplicationController
   end 
 
   def update
-    #user = User.find_by(id: session[:user_id])
-    
-    #byebug
+    #user = User.find_by(id: params[:user_id])
+    current_user
     if current_user
-      lab = current_user.update(location: params[:location], bio: params[:bio])
-      render json: lab, status: :created
+      current_user.update(location: params[:location], bio: params[:bio])
+     # byebug
+      render json: current_user, status: :created
     else 
       render json: {errors: current_user.errors.full_messages}, status: :unprocessable_entity
     end 
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   private
 
   def current_user
-    User.find_by(id: session[:user_id])
+    return User.find_by(id: session[:user_id])
   end 
 
   def user_params

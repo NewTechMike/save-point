@@ -3,7 +3,7 @@ class ListsController < ApplicationController
   def create
     user = User.find_by(id: session[:user_id])
     if user
-      list = user.list.create(list_name: params[:list_name])
+      list = user.lists.create(list_name: params[:list_name])
       render json: list, status: :created
     else
       render json: { error: list.errors.full_messages }, status: :unprocessable_entity
@@ -42,6 +42,17 @@ def show_games_in_list
     render json: list.games
   else
     render json: {errors: "Not found"}, status: :not_found
+  end
+end
+
+def remove_game_from_list
+  list = List.find_by(id: params[:list_id])
+  game = Game.find_by(id: params[:game_id])
+  if list && game
+    list.delete(game)
+    render json: list, status: :delete
+  else
+    render json: {errors: "Not Found"}, status: :not_found
   end
 end
 
