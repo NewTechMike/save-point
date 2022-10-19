@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   get '/me', to: "users#show"
   patch '/me', to: "users#update"
+  post '/me', to: "users#update"
+  
   post '/lists', to: "lists#add_game_to_list"
   get '/lists', to: "lists#show_games_in_list"
   delete '/lists', to: "lists#remove_game_from_list"

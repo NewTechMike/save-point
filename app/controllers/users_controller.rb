@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
-  #skip_before_action :authorize, only: [:create]
 
   def show
     if current_user
-      #byebug
       render json: current_user
     else 
       render json: { error: "Not Authorized"}, status: :unauthorized  
@@ -27,7 +25,6 @@ class UsersController < ApplicationController
 
   def update
     #user = User.find_by(id: params[:user_id])
-    current_user
     if current_user
       current_user.update(location: params[:location], bio: params[:bio])
      # byebug

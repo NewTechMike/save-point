@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext} from "react";
-import { BrowserRouter, Switch, Route} from "react-router-dom";
+import { useContext} from "react";
+import { Switch, Route} from "react-router-dom";
 import NavBar from "./NavBar";
 import SignUp from './SignUp';
 import Welcome from "./Welcome";
@@ -10,32 +10,9 @@ import Users from './Users';
 import { UserContext } from "../context/user";
 
 function App() {
-  //const [count, setCount] = useState(0);
   const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
 
-  console.log("A Logged: ", loggedIn)
-/* 
-  useEffect(() => {
-    fetch("/hello")
-    .then((r) => r.json())
-    .then((data) => setCount(data.count));
-  }, []); */
-  
-  /* useEffect(() => {
-    fetch("/me")
-    .then((r) => {
-      if(r.ok){
-        r.json().then((user) => setUser(user.username));
-        setLoggedIn(true)
-      } else {
-        setLoggedIn(false)
-      }
-    });
-  }, []) */
-
   return (
-   
-   
       <div className="App">
         <NavBar />
         <Switch>
@@ -59,8 +36,6 @@ function App() {
           </Route>
         </Switch>
       </div>
-
-    
   );
 }
 
