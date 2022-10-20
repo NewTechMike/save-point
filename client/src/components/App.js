@@ -7,6 +7,7 @@ import Home from './Home';
 import Login from './Login';
 import Games from './Games';
 import Users from './Users';
+import Profile from "./Profile";
 import { UserContext } from "../context/user";
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/login">
             <Login />

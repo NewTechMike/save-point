@@ -29,7 +29,7 @@ function SignUp (){
       if(r.ok){
         r.json().then((user) => setUser(user))
         setTimeout (()=>{
-          history.push('/home');
+          history.push('/profile');
         }, 500);
       } else {
         r.json().then((errorData)=> setErrors(errorData.errors))

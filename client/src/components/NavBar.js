@@ -43,6 +43,16 @@ function NavBar(){
       </NavLink>
       
       <NavLink
+        to="/profile"
+        activeStyle={{
+          background: "darkblue",
+        }}>
+        <button type="button">
+          Profile
+        </button>
+      </NavLink>
+      
+      <NavLink
         to="/games"
         activeStyle={{
           background: "darkblue",

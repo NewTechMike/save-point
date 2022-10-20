@@ -10,12 +10,11 @@ function Home(){
   const [info, setInfo] = useState(false)
   const [editLoc, setEditLoc] = useState(false)
   const [editBio, setEditBio] = useState(false)
-
+  
+  
   function handleLocationSubmit(e){
     e.preventDefault()
-    if(user.location !== newLocation){
-    //console.log("User L: ", user.location)
-    //console.log("State L: ", newLocation)   
+    if(user.location !== newLocation){  
       fetch('/me', {
         method: "PATCH", 
         headers: {
@@ -33,7 +32,6 @@ function Home(){
       setInfo(false)
     }
   }
-
 
   const [editLocButton, setEditLocButton] = useState("Edit")
   const [editBioButton, setEditBioButton] = useState("Edit")
