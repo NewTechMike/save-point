@@ -23,12 +23,18 @@ function Login(){
         r.json().then((user) => setUser(user));
         setLoggedIn(true)
         setTimeout (() => {
+          checkRender()
           history.push('/home');
         }, 500);
       } else {
         r.json().then((errorData) => setErrors(errorData.error))
       }
     });
+  }
+  function checkRender(){
+    fetch('/me')
+    .then((r)=>r.json())
+    .then(setUser)
   }
 
 if(!loggedIn){

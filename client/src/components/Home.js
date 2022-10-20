@@ -16,7 +16,7 @@ function Home(){
   
   function handleUpdateSubmit(e){
     e.preventDefault()
-    setHomeCount(homeCount+1)
+    //setHomeCount(homeCount+1)
       if(editLoc === true || editBio === true){  
       setHomeCount(homeCount+1)
       fetch('/me', {
@@ -29,14 +29,20 @@ function Home(){
       .then((r)=>r.json())
       .then((data)=> console.log("H data: ", data)) 
       setInfo(true)
-      setHomeCount(homeCount+1)
+      checkRender()
       console.log("info: ", info)
       console.log("Location Submit")
-      setHomeCount(homeCount+2)
+      //setHomeCount(homeCount+2)
     } else {
       console.log("It didn't work")
       setInfo(false)
     }
+  }
+
+  function checkRender(){
+    fetch('/me')
+    .then((r)=>r.json())
+    .then(setUser)
   }
 
   const [editLocButton, setEditLocButton] = useState("Edit")
@@ -79,13 +85,11 @@ function Home(){
       </input>
       <button type="text" >Ignore</button>
       </form>
-      <br></br>
-
-
+      
         About: 
         <br></br>
         {editBio ? <textarea 
-          placeholder={`${user.bio}`}
+          defaultValue={`${user.bio}`}
           onChange={(e)=>setNewBio(e.target.value)}
           ></textarea>:
         <div>
