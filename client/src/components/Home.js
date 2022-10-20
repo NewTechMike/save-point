@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from '../context/user'
 import { useHistory } from 'react-router-dom';
 import List from './List';
 
 function Home(){
-  const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const {user, setUser, loggedIn } = useContext(UserContext);
   const history = useHistory();
   const [newLocation, setNewLocation] = useState("")
   const [newBio, setNewBio] = useState("")

@@ -4,7 +4,7 @@ import { UserContext } from '../context/user'
 function Users(){
 
   const [users, setUsers] = useState([])
-  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
+  const {user, loggedIn} = useContext(UserContext);
 
   useEffect(()=>{
     fetch('/users')

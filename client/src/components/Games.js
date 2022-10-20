@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
 
 function Games(){
-  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [gameList, setGameList ] = useState([]) 
-  console.log("G User: ", user)
+  //console.log("G User: ", user)
 
   const [rawgGames, setRawgGames]= useState([{
     title: "", 

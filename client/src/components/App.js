@@ -11,7 +11,7 @@ import Profile from "./Profile";
 import { UserContext } from "../context/user";
 
 function App() {
-  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
+  const { loggedIn } = useContext(UserContext);
 
   return (
       <div className="App">

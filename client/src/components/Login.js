@@ -8,7 +8,7 @@ function Login(){
   const [errors, setErrors] = useState([]);
   const history = useHistory();
 
-  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const { setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleSubmit(e){
     e.preventDefault();

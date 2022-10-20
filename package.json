@@ -8,6 +8,10 @@
     "build": "npm install --prefix client && npm run build --prefix client",
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+    "heroku-postbuild": "npm run clean && npm run build && npm run deploy",
+    "Start": "node index.js"
+  },
+  "dependencies": {
+    "serve": "^14.0.1"
   }
 }

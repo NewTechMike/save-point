@@ -3,11 +3,10 @@ import { UserContext } from "../context/user";
 import { useHistory } from 'react-router-dom';
 
 function Profile(){
-  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const [newLoc, setNewLoc] = useState("")
   const [newBio, setNewBio] = useState("")
   const history = useHistory();
-  const [count, setCount] = useState(0)
 
   function handleSubmit(e){
     e.preventDefault()
@@ -24,7 +23,6 @@ function Profile(){
       .then((data)=> console.log("P data: ", data)) 
       console.log("Profile info Submitted")
       setTimeout (()=>{
-        setCount(count+1)
         history.push('/home');
       }, 500);
     } else {

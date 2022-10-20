@@ -3,7 +3,7 @@ import {UserContext} from "../context/user";
 
 function Welcome(){
 
-  const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
+  const { user, loggedIn } = useContext(UserContext);
 
   console.log("W User: ", user)
 
