@@ -7,12 +7,12 @@ function Profile(){
   const [newLoc, setNewLoc] = useState("")
   const [newBio, setNewBio] = useState("")
   const history = useHistory();
+  const [count, setCount] = useState(0)
 
   function handleSubmit(e){
     e.preventDefault()
-    console.log("P User Loc: ", user.location)
-    console.log("P User newLoc: ", newLoc)
-    if(user.location !== newLoc){  
+    
+    if(user.location === null && user.bio === null){  
       fetch('/me', {
         method: "POST", 
         headers: {
@@ -24,6 +24,7 @@ function Profile(){
       .then((data)=> console.log("P data: ", data)) 
       console.log("Profile info Submitted")
       setTimeout (()=>{
+        setCount(count+1)
         history.push('/home');
       }, 500);
     } else {

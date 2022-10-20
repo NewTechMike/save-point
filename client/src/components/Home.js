@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../context/user'
 import { useHistory } from 'react-router-dom';
+import List from './List';
 
 function Home(){
   const {user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
@@ -10,11 +11,14 @@ function Home(){
   const [info, setInfo] = useState(false)
   const [editLoc, setEditLoc] = useState(false)
   const [editBio, setEditBio] = useState(false)
+  const [homeCount, setHomeCount] = useState(0)
   
   
-  function handleLocationSubmit(e){
+  function handleUpdateSubmit(e){
     e.preventDefault()
-    if(user.location !== newLocation){  
+    setHomeCount(homeCount+1)
+      if(editLoc === true || editBio === true){  
+      setHomeCount(homeCount+1)
       fetch('/me', {
         method: "PATCH", 
         headers: {
@@ -25,8 +29,10 @@ function Home(){
       .then((r)=>r.json())
       .then((data)=> console.log("H data: ", data)) 
       setInfo(true)
+      setHomeCount(homeCount+1)
       console.log("info: ", info)
       console.log("Location Submit")
+      setHomeCount(homeCount+2)
     } else {
       console.log("It didn't work")
       setInfo(false)
@@ -53,6 +59,7 @@ function Home(){
     <div>
       Welcome to your Home Page, { user.username }
       <br></br>
+      
       From: 
       <br></br>
       {editLoc ? <input 
@@ -64,13 +71,13 @@ function Home(){
         {user.location}
         </div>
         }
-      <form onSubmit={handleLocationSubmit}>
+      <form onClick={handleUpdateSubmit}>
       <input 
         type="button" 
         value={`${editLocButton}`}
         onClick={handleEditLocClick}>
       </input>
-      <button type="submit" >Submit</button>
+      <button type="text" >Ignore</button>
       </form>
       <br></br>
 
@@ -85,18 +92,21 @@ function Home(){
           {user.bio}
         </div>
         }
-        <form onSubmit={handleLocationSubmit}>
+        <form onClick={handleUpdateSubmit}>
       <input 
         type="button" 
         value={`${editBioButton}`}
         onClick={handleEditBioClick}>
       </input>
-        <button type="submit">Submit</button>
+        <button type="text">Ignore</button>
       </form>
+
+      <List onCount={homeCount} />
     </div>
-  )} else (
+  )} else {
     history.push('/welcome')
-  )
+  }
+  
 }
 
 export default Home;
