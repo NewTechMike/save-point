@@ -8,15 +8,14 @@ function Home(){
   const [newLocation, setNewLocation] = useState("")
   const [newBio, setNewBio] = useState("")
   const [info, setInfo] = useState(false)
-  const [edit, setEdit] = useState(false)
+  const [editLoc, setEditLoc] = useState(false)
+  const [editBio, setEditBio] = useState(false)
 
   function handleLocationSubmit(e){
     e.preventDefault()
-    
     if(user.location !== newLocation){
-
-    console.log("User L: ", user.location)
-    console.log("State L: ", newLocation)   
+    //console.log("User L: ", user.location)
+    //console.log("State L: ", newLocation)   
       fetch('/me', {
         method: "PATCH", 
         headers: {
@@ -34,14 +33,21 @@ function Home(){
       setInfo(false)
     }
   }
-  console.log("info2: ", info)
-  console.log("H location: ", newLocation)
 
-  const [editButton, setEditButton] = useState("Edit")
-  function handleEditClick(){
-    setEdit(!edit)
-    {edit ? setEditButton("Edit"): setEditButton("Save")}
+
+  const [editLocButton, setEditLocButton] = useState("Edit")
+  const [editBioButton, setEditBioButton] = useState("Edit")
+  
+  function handleEditLocClick(){
+    setEditLoc(!editLoc)
+    {editLoc ? setEditLocButton("Edit"): setEditLocButton("Save")}
     console.log("User ID L: ", user.location)
+  }
+  
+  function handleEditBioClick(){
+    setEditBio(!editBio)
+    {editBio ? setEditBioButton("Edit"): setEditBioButton("Save")}
+    console.log("User ID B: ", user.bio)
   }
 
   if(loggedIn){
@@ -51,7 +57,7 @@ function Home(){
       <br></br>
       From: 
       <br></br>
-      {edit ? <input 
+      {editLoc ? <input 
         type="text"
         defaultValue={`${user.location}`}
         onChange={(e) => setNewLocation(e.target.value)}
@@ -63,28 +69,32 @@ function Home(){
       <form onSubmit={handleLocationSubmit}>
       <input 
         type="button" 
-        value={`${editButton}`}
-        onClick={handleEditClick}>
+        value={`${editLocButton}`}
+        onClick={handleEditLocClick}>
       </input>
+      <button type="submit" >Submit</button>
       </form>
       <br></br>
 
 
-        <div>
-        About: {user.bio}
-      </div>
-      <form onSubmit={handleLocationSubmit}>
-      <br></br>
-        <textarea 
-          placeholder={"This is the bio"}
+        About: 
+        <br></br>
+        {editBio ? <textarea 
+          placeholder={`${user.bio}`}
           onChange={(e)=>setNewBio(e.target.value)}
-          ></textarea>
-          <br></br>
-          <input 
-          type="submit" 
-          value="Submit" 
-        />
-          </form>
+          ></textarea>:
+        <div>
+          {user.bio}
+        </div>
+        }
+        <form onSubmit={handleLocationSubmit}>
+      <input 
+        type="button" 
+        value={`${editBioButton}`}
+        onClick={handleEditBioClick}>
+      </input>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   )} else (
     history.push('/welcome')
