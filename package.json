@@ -9,7 +9,7 @@
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy",
-    "Start": "node index.js"
+    "start":"node index.js"
   },
   "dependencies": {
     "serve": "^14.0.1"
