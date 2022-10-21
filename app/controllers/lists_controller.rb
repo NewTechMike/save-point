@@ -20,7 +20,7 @@ class ListsController < ApplicationController
     if list
       render json: list
     else
-      render json: { "Not Found"}, status: :not_found
+      render json: {errors: "Not Found"}, status: :not_found
     end 
   end 
 
