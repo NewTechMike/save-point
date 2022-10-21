@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   patch '/me', to: "users#update"
   post '/me', to: "users#update"
   
-  post '/lists', to: "lists#add_game_to_list"
+  post '/lists/:user_id', to: "lists#create"
+  patch '/lists', to: "lists#add_game_to_list"
   get '/lists', to: "lists#show_games_in_list"
   delete '/lists', to: "lists#remove_game_from_list"
 
