@@ -105,7 +105,7 @@ function Home(){
         <button type="text">Ignore</button>
       </form>
 
-      <List onCount={homeCount} />
+      <List  />
     </div>
   )} else {
     history.push('/welcome')

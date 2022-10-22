@@ -15,7 +15,7 @@ class ListsController < ApplicationController
 
   def index
     user = User.find_by(id: session[:user_id])
-    byebug
+    #byebug
     if user
       render json: user.lists.all
     else
@@ -35,7 +35,7 @@ class ListsController < ApplicationController
 
  def add_game_to_list
   list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game_id])
+  game = Game.find_by(id: params[:game.id])
   if list && game
     list.games << game
     render json: list.games, status: :added
@@ -46,7 +46,7 @@ end
 
 def show_games_in_list
   list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game_id])
+  game = Game.find_by(id: params[:game.id])
   if list && game
     render json: list.games
   else
@@ -56,7 +56,7 @@ end
 
 def remove_game_from_list
   list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game_id])
+  game = Game.find_by(id: params[:game.id])
   if list && game
     list.delete(game)
     render json: list, status: :delete

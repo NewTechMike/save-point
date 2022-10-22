@@ -1,21 +1,27 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from '../context/user'
 
-function List({onCount}){
+function List(){
   const {user, loggedIn} = useContext(UserContext);
   const [lists, setLists] = useState([])
+  const [count, setCount] = useState(0)
+
+  const [gen, setGen] = useState(false)
 
   useEffect(()=>{
-
     fetch('/lists')
     .then((r)=>r.json())
-    .then((listData)=>console.log("LD: ", listData))
-
+    .then(setLists)
   },[])
 
-  function handleListClick(id){
-    console.log("Button has been Clicked", id)
-    fetch(`/lists/${id}`, {
+    console.log("The Lists: ", lists)
+
+    const showLists = lists.map((listObj) => 
+      <li key={listObj.id}>{listObj.list_name}</li>)
+    
+  function handleListClick(){
+    console.log("Button has been Clicked", user.id) 
+    fetch(`/lists/${user.id}`, {
       method: "POST", 
       headers: {
         "Content-Type": "application/json",
@@ -23,16 +29,23 @@ function List({onCount}){
       body: JSON.stringify()
     })
     .then((r)=>r.json())
-    .then((data)=>console.log("list data: ",data))
-  }
+    .then((data)=>console.log("list data: ",data)) 
+    setGen(true) 
+  } 
 
+  if(lists.length > 0 && count == 0){
+    setGen(true)
+    setCount(1)
+  }//Too many rerenders, Most likely because
+  //of gen set to "true"
+  console.log("Gen: ", gen)
   return(
     <div>
+      <br></br>
       This will be the list component
-
-      Counter: {onCount}
-
-      <button onClick={handleListClick(user.id)}>Generate Lists</button>
+      {gen ? null:
+      <button onClick={handleListClick}>Generate Lists</button>} 
+      {showLists}
     </div>
   )
 }
