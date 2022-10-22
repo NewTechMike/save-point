@@ -17,7 +17,7 @@ function List(){
     console.log("The Lists: ", lists)
 
     const showLists = lists.map((listObj) => 
-      <li key={listObj.id}>{listObj.list_name}</li>)
+      <span key={listObj.id}>{listObj.list_name }{" "}&nbsp;</span>)
     
   function handleListClick(){
     console.log("Button has been Clicked", user.id) 
@@ -43,6 +43,8 @@ function List(){
     <div>
       <br></br>
       This will be the list component
+      <br></br>
+      <br></br>
       {gen ? null:
       <button onClick={handleListClick}>Generate Lists</button>} 
       {showLists}
