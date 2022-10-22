@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   post '/me', to: "users#update"
   
   post '/lists/:user_id', to: "lists#create"
-  patch '/lists', to: "lists#add_game_to_list"
-  get '/lists', to: "lists#show_games_in_list"
-  delete '/lists', to: "lists#remove_game_from_list"
+  patch '/lists/:list_id', to: "lists#add_game_to_list"
+  get '/lists/:list_id', to: "lists#show_games_in_list"
+  delete '/lists/:list_id', to: "lists#remove_game_from_list"
 
   post '/signup', to: "users#create"
   post '/login', to: "sessions#create"

@@ -26,10 +26,11 @@ class ListsController < ApplicationController
 
   def show 
     user = User.find_by(id: params[:user_id])
+    #byebug
     if user
       render json: user.lists.find_by(id: params[:list_id])
     else
-      render json: {errors: "Not Found"}, status: :not_found
+      render json: {errors: "not Found"}, status: :not_found
     end 
   end 
 
@@ -45,6 +46,7 @@ class ListsController < ApplicationController
 end
 
 def show_games_in_list
+  buybug
   list = List.find_by(id: params[:list_id])
   game = Game.find_by(id: params[:game.id])
   if list && game
@@ -61,7 +63,7 @@ def remove_game_from_list
     list.delete(game)
     render json: list, status: :delete
   else
-    render json: {errors: "Not Found"}, status: :not_found
+    render json: {errors: "not Found"}, status: :not_found
   end
 end
 

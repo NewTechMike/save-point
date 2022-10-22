@@ -5,19 +5,25 @@ function List(){
   const {user, loggedIn} = useContext(UserContext);
   const [lists, setLists] = useState([])
   const [count, setCount] = useState(0)
-
   const [gen, setGen] = useState(false)
 
   useEffect(()=>{
     fetch('/lists')
     .then((r)=>r.json())
-    .then(setLists)
+    .then((listData)=>setLists(listData))
   },[])
 
-    console.log("The Lists: ", lists)
+  if(lists.length >0){
+    const listID = lists[0].id
+    fetch(`/lists/${listID}`)
+    .then((r)=>r.json())
+    .then((LGdata)=>console.log("list games: ", LGdata))
+  }
+
+  //console.log("Lists: ", lists[0].id)
 
     const showLists = lists.map((listObj) => 
-      <span key={listObj.id}>{listObj.list_name }{" "}&nbsp;</span>)
+      <span key={listObj.id}>{listObj.list_name }{"  "}&nbsp;</span>)
     
   function handleListClick(){
     console.log("Button has been Clicked", user.id) 
@@ -36,9 +42,16 @@ function List(){
   if(lists.length > 0 && count == 0){
     setGen(true)
     setCount(1)
-  }//Too many rerenders, Most likely because
-  //of gen set to "true"
+  }
   console.log("Gen: ", gen)
+
+  setTimeout(()=>{
+   console.log("The Lists: ", lists[0].id)
+   
+  },[])
+ 
+
+
   return(
     <div>
       <br></br>
@@ -47,9 +60,10 @@ function List(){
       <br></br>
       {gen ? null:
       <button onClick={handleListClick}>Generate Lists</button>} 
-      {showLists}
+      {showLists} 
     </div>
   )
+
 }
 
 export default List;
