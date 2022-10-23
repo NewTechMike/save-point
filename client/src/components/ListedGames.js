@@ -14,10 +14,12 @@ function ListedGames({lists}){
       .then((r)=>r.json())
       .then((data)=>setGames1(data))
   },[])
-
-  const showGames1 = games1.map((gameObj)=>{
+  console.log("LG games1: ", games1)
+  
+  const showGames1 = games1.map((gameObj)=>
     <ul key={gameObj.id} style={{textAlign: 'center'}}>{gameObj.title}</ul>
-  })
+  )
+  console.log("LG showgames1: ", showGames1)
 
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[2].id}`)
@@ -25,9 +27,10 @@ function ListedGames({lists}){
       .then((data)=>setGames2(data))
   },[])
 
-  const showGames2 = games2.map((gameObj)=>{
+  const showGames2 = games2.map((gameObj)=>
     <ul key={gameObj.id} style={{textAlign: 'right'}}>{gameObj.title}</ul>
-  })
+  )
+  console.log("LG games2: ", games2)
 
   return(
     <div>

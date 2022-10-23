@@ -32,11 +32,13 @@ class ListsController < ApplicationController
   end 
 
  def add_game_to_list
-  list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game.id])
-  if list && game
+  user = User.find_by(id: params[:user_id])
+  list = user.lists.find_by(list_name: params[:list_name])
+  game = Game.create(title: params[:title], platform: params[:platform], genre: params[:genre], release_date: params[:release_date])
+  #byebug
+  if list
     list.games << game
-    render json: list.games, status: :added
+    render json: list.games, status: :accepted
   else
     render json: {errors: "Not found"}, status: :not_found
   end

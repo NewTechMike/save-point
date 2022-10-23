@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete '/me/:user_id', to: "users#destroy_bio"
   
   post '/lists/:user_id', to: "lists#create"
-  patch '/lists/:list_id', to: "lists#add_game_to_list"
+  patch ':user_id/lists/:list_name', to: "lists#add_game_to_list"
   get ':user_id/lists/:list_id', to: "lists#show_games_in_list"
   delete '/lists/:list_id', to: "lists#remove_game_from_list"
 
