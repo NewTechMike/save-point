@@ -46,10 +46,11 @@ class ListsController < ApplicationController
 end
 
 def show_games_in_list
-  buybug
-  list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game.id])
-  if list && game
+  user = User.find_by(id: params[:user_id])
+  list = user.lists.find_by(id: params[:list_id])
+  #byebug
+  #game = Game.find_by(id: params[:game.id])
+  if list 
     render json: list.games
   else
     render json: {errors: "Not found"}, status: :not_found

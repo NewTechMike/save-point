@@ -34,6 +34,11 @@ class UsersController < ApplicationController
     end 
   end 
 
+  def destroy
+    current_user.update(location: " ", bio: " ")
+    head :no_content
+  end 
+
   private
 
   def current_user

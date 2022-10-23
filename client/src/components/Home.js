@@ -60,6 +60,16 @@ function Home(){
     console.log("User ID B: ", user.bio)
   }
 
+  function handleDelete(user){
+   fetch(`/me/${user.id}`,{
+      method: "DELETE",
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    console.log("Delete clicked", user.id)
+  }
+
   if(loggedIn){
   return(
     <div>
@@ -83,7 +93,7 @@ function Home(){
         value={`${editLocButton}`}
         onClick={handleEditLocClick}>
       </input>
-      <button type="text" >Ignore</button>
+      
       </form>
       
         About: 
@@ -102,8 +112,13 @@ function Home(){
         value={`${editBioButton}`}
         onClick={handleEditBioClick}>
       </input>
-        <button type="text">Ignore</button>
       </form>
+      <div>
+        <button 
+          
+          onClick={()=>handleDelete(user)}
+          >Delete</button>
+        </div>
 
       <List  />
     </div>
