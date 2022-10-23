@@ -14,7 +14,8 @@
 }
 
 .span {
-  columns: 3 auto;
+  columns: auto;
+  column-gap: 100px;
 }
 
 .img {
