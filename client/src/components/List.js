@@ -1,11 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from '../context/user'
+import ListedGames from './ListedGames';
 
 function List(){
   const {user, loggedIn} = useContext(UserContext);
   const [lists, setLists] = useState([])
 
   const [games, setGames] = useState([])
+  
   const [gameCount, setGameCount] = useState(0)
   
   const [count, setCount] = useState(0)
@@ -16,19 +18,24 @@ function List(){
     .then((r)=>r.json())
     .then((listData)=>setLists(listData))
   },[])
+  console.log("Lists: ",lists)
   
+  
+
     const showLists = lists.map((listObj) => 
       <span key={listObj.id} >{listObj.list_name }{"  "}&nbsp;</span>)
 
+  console.log("ShowLists: ", showLists)
   if(lists.length > 0 && gameCount === 0){
+
     fetch(`${user.id}/lists/${lists[0].id}`)
     .then((r)=>r.json())
     .then((data)=>setGames(data))
+
     setGameCount(1)
   }
 
-  console.log("Game Count: ", gameCount)
-  console.log("Games: ", games)
+ // console.log("Games: ", games)
 
   const showGames = games.map((gameObj) => 
     <ul key={"a"+gameObj.id} style={{textAlign: 'left'}}>{gameObj.title}{" "}</ul>
@@ -55,6 +62,7 @@ function List(){
   }
   console.log("Gen: ", gen)
  
+  if(lists.length >0){
   return(
     <div>
       <br></br>
@@ -65,9 +73,15 @@ function List(){
       <button onClick={handleListClick}>Generate Lists</button>} 
       {showLists} 
       {showGames}
+
+      <ListedGames lists={lists} />
     </div>
   )
-
+  } else {
+    return (
+      <div> Loading </div>
+    )
+  }
 }
 
 export default List;

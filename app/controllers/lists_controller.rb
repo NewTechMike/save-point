@@ -6,7 +6,6 @@ class ListsController < ApplicationController
       list1 = user.lists.create(list_name: "Want to Play")
       list2 = user.lists.create(list_name: "Started Playing")
       list3 = user.lists.create(list_name: "To Replay")
-      #byebug
       render json: user.lists.all, status: :created
     else
       render json: { error: list.errors.full_messages }, status: :unprocessable_entity
@@ -15,7 +14,6 @@ class ListsController < ApplicationController
 
   def index
     user = User.find_by(id: session[:user_id])
-    #byebug
     if user
       render json: user.lists.all
     else
@@ -26,7 +24,6 @@ class ListsController < ApplicationController
 
   def show 
     user = User.find_by(id: params[:user_id])
-    #byebug
     if user
       render json: user.lists.find_by(id: params[:list_id])
     else
@@ -48,8 +45,6 @@ end
 def show_games_in_list
   user = User.find_by(id: params[:user_id])
   list = user.lists.find_by(id: params[:list_id])
-  #byebug
-  #game = Game.find_by(id: params[:game.id])
   if list 
     render json: list.games
   else
