@@ -13,7 +13,6 @@ function ListedGames({lists}){
   },[])
 
   function handleRemoveStartGame(id){
-    console.log("Remove Clicked", id)
     fetch(`${user.id}/lists/${"Started Playing"}/${id}`, {
       method: "DELETE",
       headers: {
@@ -22,7 +21,6 @@ function ListedGames({lists}){
     })
   }
   function handleRemoveReplayGame(id){
-    console.log("Remove Clicked", id)
     fetch(`${user.id}/lists/${"To Replay"}/${id}`, {
       method: "DELETE",
       headers: {
@@ -50,8 +48,6 @@ function ListedGames({lists}){
   return(
     <div>   
     <br></br>
-      <text style={{textAlign: 'center'}}>This is center{"  "}</text>
-      <text style={{textAlign: 'right'}}>{" "}This is right   </text>
       <ul>{showGames1}</ul> <ul>{showGames2}</ul>
     </div>
   )

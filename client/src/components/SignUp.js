@@ -41,7 +41,7 @@ function SignUp (){
   if(!loggedIn){
   return(
     <div>
-      Welcome to SignUp Page
+      <h1>Welcome to SignUp Page</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username">Username: </label>
@@ -87,7 +87,7 @@ function SignUp (){
   )} else {  
   return (
     <div style={{color: "orange"}}>
-      You have already Signed up and are currently Logged In, {user.username}
+      <h2>You have already Signed up and are currently Logged In, {user.username}</h2>
     </div>
   )}
 }

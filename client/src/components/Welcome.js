@@ -2,17 +2,19 @@ import React, {useContext} from 'react';
 import {UserContext} from "../context/user";
 
 function Welcome(){
-
   const { user, loggedIn } = useContext(UserContext);
-
-  console.log("W User: ", user)
 
   if(loggedIn){
   return( 
-    <div>Welcome back, {user.username}</div>
+    <div>
+      <h1>Welcome back, {user.username}</h1>
+    </div>
   )} else{
     return(
-      <div>Welcome to Save Point. Please Login or Sign Up</div>
+      <div>
+        <h1>Welcome to Save Point.</h1>
+        <h2>A place you can always come back to</h2>
+        <h3>Please Login or Sign Up</h3></div>
     )
   }
 }

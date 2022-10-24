@@ -149,13 +149,13 @@ function Games(){
   return (
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>
-      <ul>{theGames}</ul>
       <ul>{theRawgGames}</ul>
+      <ul>{theGames}</ul>
     </div>
   )} else {
     return(
       <div>
-        Welcome to the Games Page. Please login or sign up
+        <h2>Welcome to the Games Page. Please login or sign up</h2>
       </div>
     )
   }

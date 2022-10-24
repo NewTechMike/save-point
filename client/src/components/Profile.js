@@ -33,7 +33,7 @@ function Profile(){
   if(user.location === null && user.bio === null){
     return (
       <div>
-          Welcome new user, Here you can add your location and bio about yourself
+         <h2> Welcome new user, Here you can add your location and bio about yourself</h2>
       <div>
         From:
         <br></br>
@@ -59,8 +59,8 @@ function Profile(){
     )
   } else {
     return (
-      <div> 
-        You can change your profile info on the Home page
+      <div style={{color: "orange"}}> 
+        <h2>You can change your profile info on the Home page</h2>
       </div>
     )
   }

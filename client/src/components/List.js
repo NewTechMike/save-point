@@ -3,14 +3,12 @@ import {UserContext} from '../context/user'
 import ListedGames from './ListedGames';
 
 function List(){
-  const {user, loggedIn} = useContext(UserContext);
+  const {user, setUser, loggedIn} = useContext(UserContext);
   const [lists, setLists] = useState([])
-
-  const [games, setGames] = useState([])
-  
+  const [games, setGames] = useState([])  
   const [gameCount, setGameCount] = useState(0)
-  
   const [count, setCount] = useState(0)
+  const [check, setCheck] = useState()
   const [gen, setGen] = useState(false)
   
   useEffect(()=>{
@@ -18,42 +16,42 @@ function List(){
     .then((r)=>r.json())
     .then((listData)=>setLists(listData))
   },[])
-  console.log("Lists: ",lists)
-  
-  
 
-    const showLists = lists.map((listObj) => 
-      <span key={listObj.id} >{listObj.list_name }{"  "}&nbsp;</span>)
+  const showLists = lists.map((listObj) => 
+    <span key={listObj.id} >{listObj.list_name }{"  "}&nbsp;</span>)
 
-  console.log("ShowLists: ", showLists)
   if(lists.length > 0 && gameCount === 0){
-
     fetch(`${user.id}/lists/${lists[0].id}`)
     .then((r)=>r.json())
     .then((data)=>setGames(data))
-
     setGameCount(1)
   }
 
- // console.log("Games: ", games)
-
  function handleRemoveWantGame(id){
-  console.log("Remove Clicked", id)
   fetch(`${user.id}/lists/${"Want to Play"}/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json"
     }
   })
+  .then((r)=>r.json())
+  .then((data)=>setCheck(data))
+  checkRender()
+  setCount(count+1)
+  console.log(count)
+}
+
+function checkRender(){
+  fetch('/me')
+    .then((r)=>r.json())
+    .then(setUser)
 }
   const showGames = games.map((gameObj) => 
     <li key={"a"+gameObj.id} style={{textAlign: 'left'}}>{gameObj.title}{" "}
     <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li>
   ) 
   
-  console.log("SG: ", showGames)
   function handleListClick(){
-    console.log("Button has been Clicked", user.id) 
     fetch(`/lists/${user.id}`, {
       method: "POST", 
       headers: {
@@ -70,24 +68,22 @@ function List(){
     setGen(true)
     setCount(1)
   }
-  console.log("Gen: ", gen)
  
   if(lists.length >0){
   return(
     <div>
       <br></br>
-      This will be the list component
       <br></br>
       <br></br>
       {gen ? null:
       <button onClick={handleListClick}>Generate Lists</button>} 
-      {showLists} 
+      <div style={{color: "Green"}}>
+        {showLists} 
       <ul>
-      
-        {showGames}
-        
-        </ul>
+        {showGames}      
+      </ul>
       <ListedGames lists={lists} />
+      </div>
     </div>
   )
   } else {

@@ -13,10 +13,9 @@ function Home(){
   const [editBio, setEditBio] = useState(false)
   const [homeCount, setHomeCount] = useState(0)
   
-  
   function handleUpdateSubmit(e){
     e.preventDefault()
-    //setHomeCount(homeCount+1)
+    
       if(editLoc === true || editBio === true){  
       setHomeCount(homeCount+1)
       fetch('/me', {
@@ -30,9 +29,6 @@ function Home(){
       .then((data)=> console.log("H data: ", data)) 
       setInfo(true)
       checkRender()
-      console.log("info: ", info)
-      console.log("Location Submit")
-      //setHomeCount(homeCount+2)
     } else {
       console.log("It didn't work")
       setInfo(false)
@@ -51,13 +47,11 @@ function Home(){
   function handleEditLocClick(){
     setEditLoc(!editLoc)
     {editLoc ? setEditLocButton("Edit"): setEditLocButton("Save")}
-    console.log("User ID L: ", user.location)
   }
   
   function handleEditBioClick(){
     setEditBio(!editBio)
     {editBio ? setEditBioButton("Edit"): setEditBioButton("Save")}
-    console.log("User ID B: ", user.bio)
   }
 
   function handleDelete(user){
@@ -73,18 +67,19 @@ function Home(){
   if(loggedIn){
   return(
     <div>
-      Welcome to your Home Page, { user.username }
+
+      <h1>Welcome to your Home Page, { user.username }</h1>
       <br></br>
       
-      From: 
-      <br></br>
+     <p> From: </p>
+      
       {editLoc ? <input 
         type="text"
         defaultValue={`${user.location}`}
         onChange={(e) => setNewLocation(e.target.value)}
         /> :
       <div>
-        {user.location}
+        <p>{user.location}</p>
         </div>
         }
       <form onClick={handleUpdateSubmit}>
@@ -95,15 +90,15 @@ function Home(){
       </input>
       
       </form>
-      
-        About: 
-        <br></br>
+       <br></br>
+        <p>About: </p>
+        
         {editBio ? <textarea 
           defaultValue={`${user.bio}`}
           onChange={(e)=>setNewBio(e.target.value)}
           ></textarea>:
         <div>
-          {user.bio}
+         <p>{user.bio}</p> 
         </div>
         }
         <form onClick={handleUpdateSubmit}>

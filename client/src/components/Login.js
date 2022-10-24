@@ -40,7 +40,7 @@ function Login(){
 if(!loggedIn){
   return(
     <div>
-      Login Page
+      <h1>Login Page</h1>
       <form onSubmit={ handleSubmit }>
         <label htmlFor="username">Username</label>
         <br/>
@@ -75,7 +75,9 @@ if(!loggedIn){
     </div>
   )} else {
     return(
-      <div style={{color: "orange"}}>You are already Logged In</div>
+      <div style={{color: "orange"}}>
+        <h2>You are already Logged In</h2>
+      </div>
     )
   }
 }
