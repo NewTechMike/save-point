@@ -1,12 +1,10 @@
 li {
-  column-span: all;
-  column-count: 3 auto;
-  column-gap: 100px;
-  color:#0ed108d5;
+  
+  color:#eb1414e1;
   -webkit-text-stroke-width: .25px;
-  -webkit-text-stroke-color: blue
+  -webkit-text-stroke-color: pink;
+  font-size: larger;
 }
-
 
 body {
   background-image: url("./images/laser room.jpeg");
@@ -15,8 +13,6 @@ body {
   background-size: cover;
   background-blend-mode: soft-light ;
 }
-
-
 
 p, h1 {
   color: rgb(200, 221, 7);
@@ -28,8 +24,20 @@ h2 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(146, 10, 55);
 }
+h3 {
+  color: rgb(221, 189, 7);
+  text-shadow: 2px 2px rgba(65, 110, 233, 0.87);
+}
+
+span {
+  color: rgb(4, 180, 4);
+  text-align: center;
+  grid-column-start: auto;
+}
+
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -37,14 +45,11 @@ h2 {
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.span {
-  display: grid
 }
 
 .img {

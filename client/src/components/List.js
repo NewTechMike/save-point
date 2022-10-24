@@ -18,7 +18,8 @@ function List(){
   },[])
 
   const showLists = lists.map((listObj) => 
-    <span key={listObj.id} >{listObj.list_name }{"  "}&nbsp;</span>)
+    <span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span>
+  )
 
   if(lists.length > 0 && gameCount === 0){
     fetch(`${user.id}/lists/${lists[0].id}`)
@@ -46,9 +47,12 @@ function checkRender(){
     .then((r)=>r.json())
     .then(setUser)
 }
+
   const showGames = games.map((gameObj) => 
-    <li key={"a"+gameObj.id} style={{textAlign: 'left'}}>{gameObj.title}{" "}
+  <div >
+    <li key={"a"+gameObj.id} style={{textAlign: "left"}}>{gameObj.title}{" "}
     <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li>
+  </div>
   ) 
   
   function handleListClick(){
@@ -71,19 +75,16 @@ function checkRender(){
  
   if(lists.length >0){
   return(
-    <div>
-      <br></br>
-      <br></br>
-      <br></br>
+    <div >
       {gen ? null:
       <button onClick={handleListClick}>Generate Lists</button>} 
-      <div style={{color: "Green"}}>
-        {showLists} 
-      <ul>
-        {showGames}      
-      </ul>
+      <br></br>
+      <br></br>
+      
+      {showLists} 
+      {showGames}      
       <ListedGames lists={lists} />
-      </div>
+      <span >{count}</span>
     </div>
   )
   } else {

@@ -114,7 +114,8 @@ function Home(){
           onClick={()=>handleDelete(user)}
           >Delete</button>
         </div>
-
+          <br></br>
+          <br></br>
       <List  />
     </div>
   )} else {

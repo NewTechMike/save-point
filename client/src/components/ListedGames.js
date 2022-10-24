@@ -30,7 +30,7 @@ function ListedGames({lists}){
   }
   
   const showGames1 = games1.map((gameObj)=>
-    <li key={gameObj.id} style={{textAlign: 'center'}}>{gameObj.title}
+    <li key={gameObj.id} style={{textAlign: "center"}}>{gameObj.title}
     <button onClick={()=>handleRemoveStartGame(gameObj.id)}>X</button></li>
   )
 
@@ -41,14 +41,18 @@ function ListedGames({lists}){
   },[])
 
   const showGames2 = games2.map((gameObj)=>
-    <li key={gameObj.id} style={{textAlign: 'right'}}>{gameObj.title} 
+  <div >
+    <li key={gameObj.id} style={{textAlign: "right"}}>{gameObj.title} 
     <button onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button></li>
+  
+  </div>
   )
   
   return(
     <div>   
     <br></br>
-      <ul>{showGames1}</ul> <ul>{showGames2}</ul>
+      {showGames1}
+      {showGames2}
     </div>
   )
 }
