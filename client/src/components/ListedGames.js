@@ -5,21 +5,36 @@ function ListedGames({lists}){
   const [games1, setGames1]= useState([])
   const [games2, setGames2]= useState([])
   const { user } = useContext(UserContext);
-  console.log("LG user: ", user)
-
-  console.log("LG: ", lists[1].id)
-
+ 
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[1].id}`)
       .then((r)=>r.json())
       .then((data)=>setGames1(data))
   },[])
-  console.log("LG games1: ", games1)
+
+  function handleRemoveStartGame(id){
+    console.log("Remove Clicked", id)
+    fetch(`${user.id}/lists/${"Started Playing"}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  }
+  function handleRemoveReplayGame(id){
+    console.log("Remove Clicked", id)
+    fetch(`${user.id}/lists/${"To Replay"}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  }
   
   const showGames1 = games1.map((gameObj)=>
-    <ul key={gameObj.id} style={{textAlign: 'center'}}>{gameObj.title}</ul>
+    <li key={gameObj.id} style={{textAlign: 'center'}}>{gameObj.title}
+    <button onClick={()=>handleRemoveStartGame(gameObj.id)}>X</button></li>
   )
-  console.log("LG showgames1: ", showGames1)
 
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[2].id}`)
@@ -28,18 +43,16 @@ function ListedGames({lists}){
   },[])
 
   const showGames2 = games2.map((gameObj)=>
-    <ul key={gameObj.id} style={{textAlign: 'right'}}>{gameObj.title}</ul>
+    <li key={gameObj.id} style={{textAlign: 'right'}}>{gameObj.title} 
+    <button onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button></li>
   )
-  console.log("LG games2: ", games2)
-
+  
   return(
-    <div>
-      
+    <div>   
     <br></br>
       <text style={{textAlign: 'center'}}>This is center{"  "}</text>
       <text style={{textAlign: 'right'}}>{" "}This is right   </text>
-      {showGames1}
-      {showGames2}
+      <ul>{showGames1}</ul> <ul>{showGames2}</ul>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
 
 function Games(){
-  const { user } = useContext(UserContext);
+  const { user, loggedIn } = useContext(UserContext);
   const [gameList, setGameList ] = useState([]) 
   const [rawgGames, setRawgGames]= useState([{
     title: "", 
@@ -52,16 +52,7 @@ function Games(){
       </ul>
     )
   
-    function handleSomething(e){
-      console.log("something", e)
-    }
-
-    function handleWantClick(name, platform, genre, release_date){
-      console.log("Want was clicked", name)
-      console.log("Want was clicked", platform)
-      console.log("Want was clicked", genre)
-      console.log("Current user: ", user.id)
-
+    function handleWantClick(name, platform, genre, release_date, cover_art){
       fetch(`${user.id}/lists/${"Want to Play"}`, {
         method: "PATCH", 
         headers: {
@@ -72,18 +63,15 @@ function Games(){
           title: name,
           platform: platform,
           genre: genre,
-          release_date
+          release_date: release_date,
+          cover_art: cover_art
         })
       })
-      .then((r)=>console.log(r))
+      .then((r)=>r.json())
+      .then((data)=>console.log(data))
     }
 
     function handleStartClick(name, platform, genre, release_date){
-      console.log("Started was clicked", name)
-      console.log("Started was clicked", platform)
-      console.log("Started was clicked", genre)
-      console.log("Current user: ", user.id)
-
       fetch(`${user.id}/lists/${"Started Playing"}`, {
         method: "PATCH", 
         headers: {
@@ -97,15 +85,11 @@ function Games(){
           release_date
         })
       })
-      .then((r)=>console.log(r))
+      .then((r)=>r.json())
+      .then((data)=>console.log(data))
     }
 
     function handleReplayClick(name, platform, genre, release_date){
-      console.log("Replay was clicked", name)
-      console.log("Replay was clicked", platform)
-      console.log("Replay was clicked", genre)
-      console.log("Current user: ", user.id)
-
       fetch(`${user.id}/lists/${"To Replay"}`, {
         method: "PATCH", 
         headers: {
@@ -119,13 +103,10 @@ function Games(){
           release_date
         })
       })
-      .then((r)=>console.log(r))
+      .then((r)=>r.json())
+      .then((data)=>console.log(data))
     }
 
-
-
-  //:title, :platform, :genre, :release_date, :cover_art
-    //console.log("RG: ", rawgGames)
     const [theRawgGames, setTheRawgGames] = useState([]);
     useEffect(()=>{
     
@@ -144,6 +125,7 @@ function Games(){
             rawgData.parent_platforms[0].platform.name,
             rawgData.genres[0].name,
             rawgData.released,
+            rawgData.background_image
             )}>Want to Play</button>
           <button onClick={()=>handleStartClick(
             rawgData.name,
@@ -163,16 +145,20 @@ function Games(){
     
     }, [rawgGames])
 
-  console.log("RG L: ", rawgGames.length)
-       
-  //console.log("TRG: ", theRawgGames)
+  if(loggedIn){
   return (
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>
       <ul>{theGames}</ul>
       <ul>{theRawgGames}</ul>
     </div>
-  )
+  )} else {
+    return(
+      <div>
+        Welcome to the Games Page. Please login or sign up
+      </div>
+    )
+  }
 }
 
 export default Games;

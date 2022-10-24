@@ -34,8 +34,7 @@ class ListsController < ApplicationController
  def add_game_to_list
   user = User.find_by(id: params[:user_id])
   list = user.lists.find_by(list_name: params[:list_name])
-  game = Game.create(title: params[:title], platform: params[:platform], genre: params[:genre], release_date: params[:release_date])
-  #byebug
+  game = Game.create(game_params)
   if list
     list.games << game
     render json: list.games, status: :accepted
@@ -55,14 +54,22 @@ def show_games_in_list
 end
 
 def remove_game_from_list
-  list = List.find_by(id: params[:list_id])
-  game = Game.find_by(id: params[:game.id])
-  if list && game
-    list.delete(game)
-    render json: list, status: :delete
+  user = User.find_by(id: params[:user_id])
+  list = user.lists.find_by(list_name: params[:list_name])
+  game = list.games.find_by(id: params[:game_id])
+  #byebug
+  if game 
+    game.destroy
+    head :no_content
   else
     render json: {errors: "not Found"}, status: :not_found
   end
 end
+
+private
+
+def game_params
+  params.permit(:title, :platform, :genre, :release_date, :cover_art)
+end 
 
 end

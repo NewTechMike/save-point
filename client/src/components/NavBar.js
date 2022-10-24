@@ -20,6 +20,15 @@ function NavBar(){
     history.push('/login')
   }
 
+  /**<NavLink
+        to="/users"
+        activeStyle={{
+            background: "darkblue",
+        }}>
+        <button type="button">
+          Users
+        </button>
+      </NavLink> */
   return(
     <div>
       <NavLink
@@ -59,16 +68,6 @@ function NavBar(){
         }}>
         <button type="button">
           Games
-        </button>
-      </NavLink>
-
-      <NavLink
-        to="/users"
-        activeStyle={{
-            background: "darkblue",
-        }}>
-        <button type="button">
-          Users
         </button>
       </NavLink>
 

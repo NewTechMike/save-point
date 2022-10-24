@@ -37,8 +37,18 @@ function List(){
 
  // console.log("Games: ", games)
 
+ function handleRemoveWantGame(id){
+  console.log("Remove Clicked", id)
+  fetch(`${user.id}/lists/${"Want to Play"}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+}
   const showGames = games.map((gameObj) => 
-    <ul key={"a"+gameObj.id} style={{textAlign: 'left'}}>{gameObj.title}{" "}</ul>
+    <li key={"a"+gameObj.id} style={{textAlign: 'left'}}>{gameObj.title}{" "}
+    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li>
   ) 
   
   console.log("SG: ", showGames)
@@ -72,8 +82,11 @@ function List(){
       {gen ? null:
       <button onClick={handleListClick}>Generate Lists</button>} 
       {showLists} 
-      {showGames}
-
+      <ul>
+      
+        {showGames}
+        
+        </ul>
       <ListedGames lists={lists} />
     </div>
   )
