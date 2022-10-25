@@ -9,7 +9,7 @@ function SignUp (){
   const [errors, setErrors] = useState([])
   const history = useHistory();
 
-  const { user, setUser, loggedIn } = useContext(UserContext);
+  const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleSubmit(e){
     e.preventDefault()
@@ -28,13 +28,23 @@ function SignUp (){
     .then((r) => {
       if(r.ok){
         r.json().then((user) => setUser(user))
-        setTimeout (()=>{
-          history.push('/profile');
-        }, 250);
+        goProfile()
       } else {
         r.json().then((errorData)=> setErrors(errorData.errors))
       }
     })
+  }
+  function goProfile(){
+    if(loggedIn){
+      setTimeout (()=>{
+        history.push('/profile');
+      }, 250);
+    } else {
+      setLoggedIn(true)
+      setTimeout (()=>{
+        history.push('/profile');
+      }, 250);
+    }
   }
   console.log("errors: ", errors)
   
