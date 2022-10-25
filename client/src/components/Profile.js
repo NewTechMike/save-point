@@ -41,7 +41,7 @@ function Profile(){
 
   }
   }
-  
+  if(loggedIn){
   if(user.location === null && user.bio === null){
     return (
       <div>
@@ -76,6 +76,9 @@ function Profile(){
       </div>
     )
   }
+} else {
+  history.push('/welcome');
+}
 }
 
 export default Profile;
