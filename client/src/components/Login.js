@@ -42,7 +42,7 @@ if(!loggedIn){
     <div>
       <h1>Login Page</h1>
       <form onSubmit={ handleSubmit }>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="username" style={{color: "gold"}}>Username</label>
         <br/>
         <input 
           type="text"
@@ -52,7 +52,7 @@ if(!loggedIn){
           onChange={(e) => setUsername(e.target.value)}
           /> <br/>
           
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" style={{color: "gold"}}>Password</label>
         <br/>
         <input 
           type="password"

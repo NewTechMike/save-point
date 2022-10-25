@@ -5,6 +5,9 @@ function ListedGames({lists}){
   const [games1, setGames1]= useState([])
   const [games2, setGames2]= useState([])
   const { user } = useContext(UserContext);
+
+  const [clicked, setClicked] = useState(false)
+  
  
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[1].id}`)
@@ -19,6 +22,14 @@ function ListedGames({lists}){
         "Content-Type": "application/json"
       }
     })
+    setTimeout(()=>{
+      checkRender1()
+    }, 250)
+  }
+  function checkRender1(){
+    fetch(`${user.id}/lists/${lists[1].id}`)
+    .then((r)=>r.json())
+    .then((data)=>setGames1(data))
   }
   function handleRemoveReplayGame(id){
     fetch(`${user.id}/lists/${"To Replay"}/${id}`, {
@@ -27,6 +38,14 @@ function ListedGames({lists}){
         "Content-Type": "application/json"
       }
     })
+    setTimeout(()=>{
+      checkRender2()
+    }, 250)
+  }
+  function checkRender2(){
+    fetch(`${user.id}/lists/${lists[2].id}`)
+    .then((r)=>r.json())
+    .then((data)=>setGames2(data))
   }
   
   const showGames1 = games1.map((gameObj)=>
@@ -53,6 +72,7 @@ function ListedGames({lists}){
     <br></br>
       {showGames1}
       {showGames2}
+
     </div>
   )
 }

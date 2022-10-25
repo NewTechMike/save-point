@@ -62,6 +62,9 @@ function Home(){
       }
     })
     console.log("Delete clicked", user.id)
+    setTimeout(()=>{
+      checkRender()
+    }, 250)
   }
 
   if(loggedIn){
@@ -70,15 +73,13 @@ function Home(){
 
       <h1>Welcome to your Home Page, { user.username }</h1>
       <br></br>
-      
-     <p> From: </p>
-      
+     <p> From: </p>    
       {editLoc ? <input 
-        type="text"
+        
         defaultValue={`${user.location}`}
         onChange={(e) => setNewLocation(e.target.value)}
         /> :
-      <div>
+        <div>
         <p>{user.location}</p>
         </div>
         }

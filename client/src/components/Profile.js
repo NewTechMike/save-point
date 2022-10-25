@@ -3,7 +3,7 @@ import { UserContext } from "../context/user";
 import { useHistory } from 'react-router-dom';
 
 function Profile(){
-  const {user} = useContext(UserContext);
+  const {user, loggedIn, setLoggedIn} = useContext(UserContext);
   const [newLoc, setNewLoc] = useState("")
   const [newBio, setNewBio] = useState("")
   const history = useHistory();
@@ -22,19 +22,31 @@ function Profile(){
       .then((r)=>r.json())
       .then((data)=> console.log("P data: ", data)) 
       console.log("Profile info Submitted")
-      setTimeout (()=>{
-        history.push('/home');
-      }, 500);
+      goHome()
     } else {
       console.log("It didn't work")    
     }
+  }
+  function goHome(){
+    if(loggedIn){
+      console.log(loggedIn)
+      setTimeout (()=>{
+        history.push('/home');
+      }, 1000);
+    } else {
+    setLoggedIn(true)
+    setTimeout (()=>{
+      history.push('/home');
+    }, 1000);
+
+  }
   }
   
   if(user.location === null && user.bio === null){
     return (
       <div>
          <h2> Welcome new user, Here you can add your location and bio about yourself</h2>
-      <div>
+      <div style={{color: "gold"}}>
         From:
         <br></br>
         <form onSubmit={handleSubmit}>

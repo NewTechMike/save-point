@@ -30,7 +30,7 @@ function SignUp (){
         r.json().then((user) => setUser(user))
         setTimeout (()=>{
           history.push('/profile');
-        }, 500);
+        }, 250);
       } else {
         r.json().then((errorData)=> setErrors(errorData.errors))
       }
@@ -44,9 +44,9 @@ function SignUp (){
       <h1>Welcome to SignUp Page</h1>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="username" style={{color: "gold"}}>Username: </label>
           <br/>
-          <input
+          <input 
             type="text"
             id="username"
             autoComplete="off"
@@ -54,7 +54,7 @@ function SignUp (){
             onChange={(e)=> setUsername(e.target.value)}
           /> <br/>
 
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password" style={{color: "gold"}}>Password: </label>
           <br/>
           <input 
              type="password"
@@ -64,7 +64,7 @@ function SignUp (){
              onChange={(e)=> setPassword(e.target.value)}
            /><br/>
 
-          <label htmlFor="password">Password Confirmation: </label>
+          <label htmlFor="password" style={{color: "gold"}}>Password Confirmation: </label>
           <br/>
           <input 
              type="password"

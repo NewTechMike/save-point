@@ -24,18 +24,16 @@ class UsersController < ApplicationController
   end 
 
   def update
-    #user = User.find_by(id: params[:user_id])
     if current_user
       current_user.update(location: params[:location], bio: params[:bio])
-     # byebug
       render json: current_user, status: :created
     else 
       render json: {errors: current_user.errors.full_messages}, status: :unprocessable_entity
     end 
   end 
 
-  def destroy
-    current_user.update(location: " ", bio: " ")
+  def destroy_bio
+    current_user.update(bio: "")
     head :no_content
   end 
 

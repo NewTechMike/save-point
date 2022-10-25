@@ -7,11 +7,12 @@ li {
 }
 
 body {
-  background-image: url("./images/laser room.jpeg");
+  background-image: url("./images/greencontrollers.webp");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-blend-mode: soft-light ;
+  opacity: 2;
 }
 
 p, h1 {
@@ -20,13 +21,17 @@ p, h1 {
 }
 
 h2 {
-  text-shadow: 3px, 3px, rgba(2, 133, 61, 0.274);
+  text-shadow: 3px, 3px, #11d8c7a4;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(146, 10, 55);
+  -webkit-text-stroke-color: rgb(16, 166, 212);
 }
 h3 {
   color: rgb(221, 189, 7);
   text-shadow: 2px 2px rgba(65, 110, 233, 0.87);
+}
+
+h4 {
+  color:rgb(16, 166, 212)
 }
 
 span {
@@ -38,6 +43,11 @@ span {
 .App {
   text-align: center;
   
+}
+
+img {
+  width: 50%; 
+  height: 50%;
 }
 
 .App-logo {
@@ -52,10 +62,6 @@ span {
   }
 }
 
-.img {
-  width: "75%"; 
-  height: "75%"
-}
 
 .App-header {
   background-color: #282c34;

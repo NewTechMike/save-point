@@ -8,8 +8,9 @@ function List(){
   const [games, setGames] = useState([])  
   const [gameCount, setGameCount] = useState(0)
   const [count, setCount] = useState(0)
-  const [check, setCheck] = useState()
+  const [check, setCheck] = useState([])
   const [gen, setGen] = useState(false)
+  const [clicked, setClicked] = useState(false)
   
   useEffect(()=>{
     fetch('/lists')
@@ -35,19 +36,16 @@ function List(){
       "Content-Type": "application/json"
     }
   })
-  .then((r)=>r.json())
-  .then((data)=>setCheck(data))
+  setTimeout(()=>{
   checkRender()
-  setCount(count+1)
-  console.log(count)
+}, 250)
 }
 
 function checkRender(){
-  fetch('/me')
+  fetch(`${user.id}/lists/${lists[0].id}`)
     .then((r)=>r.json())
-    .then(setUser)
+    .then((data)=>setGames(data))
 }
-
   const showGames = games.map((gameObj) => 
   <div >
     <li key={"a"+gameObj.id} style={{textAlign: "left"}}>{gameObj.title}{" "}
@@ -66,30 +64,41 @@ function checkRender(){
     .then((r)=>r.json())
     .then((data)=>console.log("list data: ",data)) 
     setGen(true) 
+    setTimeout(()=>{
+      checkListRender()
+  }, 250)
   } 
+  
+  function checkListRender(){
+    fetch('/lists')
+    .then((r)=>r.json())
+    .then((listData)=>setLists(listData))
+  }
+
 
   if(lists.length > 0 && count === 0){
     setGen(true)
     setCount(1)
   }
  
-  if(lists.length >0){
+  if(lists.length > 0){
   return(
     <div >
-      {gen ? null:
-      <button onClick={handleListClick}>Generate Lists</button>} 
       <br></br>
+      <h4>Click on the Games button and start adding to your lists</h4>
       <br></br>
-      
       {showLists} 
       {showGames}      
       <ListedGames lists={lists} />
-      <span >{count}</span>
     </div>
   )
   } else {
     return (
-      <div> Loading </div>
+      <div> 
+
+        {gen ? null:
+      <button onClick={handleListClick}>Generate Lists</button>}
+      </div>
     )
   }
 }
