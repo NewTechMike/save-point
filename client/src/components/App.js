@@ -21,6 +21,9 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
+          <Route exact path="/">
+            <Welcome />
+          </Route>
           <Route path="/welcome">
             <Welcome />
           </Route>

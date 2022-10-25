@@ -38,7 +38,7 @@ function List(){
   })
   setTimeout(()=>{
   checkRender()
-}, 250)
+  }, 250)
 }
 
 function checkRender(){
