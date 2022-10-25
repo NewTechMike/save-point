@@ -28,7 +28,9 @@ function SignUp (){
     .then((r) => {
       if(r.ok){
         r.json().then((user) => setUser(user))
+        setTimeout(()=>{
         goProfile()
+      },500)
       } else {
         r.json().then((errorData)=> setErrors(errorData.errors))
       }
@@ -36,10 +38,14 @@ function SignUp (){
   }
   function goProfile(){
     if(loggedIn){
+      console.log(loggedIn)
+      console.log("su ",user)
       setTimeout (()=>{
         history.push('/profile');
       }, 250);
     } else {
+      console.log(loggedIn)
+      console.log("su 2 ",user)
       setLoggedIn(true)
       setTimeout (()=>{
         history.push('/profile');
