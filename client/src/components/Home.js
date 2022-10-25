@@ -13,6 +13,8 @@ function Home(){
   const [editBio, setEditBio] = useState(false)
   const [homeCount, setHomeCount] = useState(0)
   
+  console.log("home user: ", user)
+
   function handleUpdateSubmit(e){
     e.preventDefault()
     

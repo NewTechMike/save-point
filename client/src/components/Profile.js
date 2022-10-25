@@ -3,7 +3,7 @@ import { UserContext } from "../context/user";
 import { useHistory } from 'react-router-dom';
 
 function Profile(){
-  const {user, loggedIn, setLoggedIn} = useContext(UserContext);
+  const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
   const [newLoc, setNewLoc] = useState("")
   const [newBio, setNewBio] = useState("")
   const history = useHistory();
@@ -20,9 +20,11 @@ function Profile(){
         body: JSON.stringify({location: newLoc, bio: newBio})
       })
       .then((r)=>r.json())
-      .then((data)=> console.log("P data: ", data)) 
+      .then((data)=> setUser(data)) 
       console.log("Profile info Submitted")
+      setTimeout(()=>{
       goHome()
+    }, 500)
     } else {
       console.log("It didn't work")    
     }
@@ -30,11 +32,13 @@ function Profile(){
   function goHome(){
     if(loggedIn){
       console.log(loggedIn)
+      console.log("P user: ", user)
       setTimeout (()=>{
         history.push('/home');
       }, 1000);
     } else {
     setLoggedIn(true)
+    console.log("P user 2: ", user)
     setTimeout (()=>{
       history.push('/home');
     }, 1000);
