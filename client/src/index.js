@@ -5,6 +5,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {UserProvider} from './context/user'
+import './fonts/press_start_2p/PressStart2P.ttf'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 

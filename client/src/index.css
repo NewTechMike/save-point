@@ -7,6 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: "PressStart2P";
+  src: local("PressStart2P"),
+   url("./fonts/press_start_2p/PressStart2P.ttf") format("truetype");
+  font-weight: bold;
+  }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

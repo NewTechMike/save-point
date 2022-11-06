@@ -29,68 +29,49 @@ function NavBar(){
           Users
         </button>
       </NavLink> */
-      
+
   return(
     <div>
+
       <NavLink
+      bg="light"
+      variant="dark"
         to="/welcome"
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        <button type="button">
-          Welcome
-        </button>
-      </NavLink>
+        className="brand-name"
+        style={{}}
+        activeStyle={{}}
+          >SavePoint</NavLink>
 
       <NavLink
         to="/home"
+       
         activeStyle={{
-          background: "darkblue",
-        }}>
-        <button type="button">
-          Home
-        </button>
-      </NavLink>
+          color: "lightblue",
+        }}>Home</NavLink>
       
       <NavLink
         to="/profile"
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        <button type="button">
-          Profile
-        </button>
-      </NavLink>
+        style={{}}
+        activeStyle={{}}
+        >Profile</NavLink>
       
       <NavLink
         to="/games"
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        <button type="button">
-          Games
-        </button>
-      </NavLink>
+        style={{}}
+        activeStyle={{}}
+        >Games</NavLink>
 
       <NavLink
         to="/login"
-        activeStyle={{
-          background: "darkblue",
-        }}>
-        <button type="button">
-          Login Page
-        </button>
-      </NavLink>
+        style={{}}
+        activeStyle={{}}
+        >Login</NavLink>
 
       <NavLink
         to="/signup"
-        activeStyle={{
-            background: "darkblue",
-        }}>
-        <button type="button">
-          SignUp
-        </button>
-      </NavLink>
+        style={{}}
+        activeStyle={{}}
+        >SignUp</NavLink>
       <header>
         <button onClick={handleLogout}>Logout</button>
       </header>

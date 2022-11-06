@@ -4,6 +4,7 @@ li {
   -webkit-text-stroke-width: .25px;
   -webkit-text-stroke-color: pink;
   font-size: larger;
+  grid-column-start: auto;
   
 }
 
@@ -75,8 +76,40 @@ img {
   color: white;
 }
 
+a {
+  padding: 1rem;
+  color:rgba(11, 236, 11, 0.705);
+  position: relative;
+  width: 100%;
+  height: 60px;
+  font-family: 'PressStart2P', monospace;
+}
+
+a.active{
+  color: lightblue;
+}
+
+.brand-name{
+  color: silver;
+  align-self: left;
+  font-family: fantasy;
+  font-size: 34px;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+header {
+  text-align: right;
+  color:rgb(4, 180, 4);
+}
+
+button {
+  color:rgb(230, 226, 7);
+  background-color:rgba(158, 9, 108, 0.288);
+  border: none;
+  font-size: 15px;
 }
 
 @keyframes App-logo-spin {
