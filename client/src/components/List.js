@@ -94,11 +94,15 @@ function checkRender(){
       <thead>
       <th>{showLists} </th>
       </thead>
+      <div style={{paddingLeft: "2rem"}}>
+      <table class="table">
         <br></br>
       <tbody>
       <td>{showGames} </td>
       <ListedGames lists={lists} />
       </tbody>
+      </table>
+      </div>
     </div>
   )
   } else {

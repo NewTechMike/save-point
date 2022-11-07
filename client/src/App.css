@@ -41,10 +41,9 @@ span {
 li {
   
   color:#ce0707e1;
-  -webkit-text-stroke-width: .25px;
+  -webkit-text-stroke-width: .50px;
   -webkit-text-stroke-color: pink;
   font-size: larger;
-  padding: 100 rem ;
   text-align: center;
 }
 
@@ -106,18 +105,29 @@ header {
   color:rgb(4, 180, 4);
 }
 
-button {
-  color:rgb(230, 226, 7);
-  background-color:rgba(158, 9, 108, 0.288);
-  border: none;
+button, input {
+  color:white;
+  background-color: #F88D2E;
+  box-shadow: inset -4px -4px 0 #965117, inset 4px 4px 0 #FAB89B;
+  border: solid;
+  border-color: #070000;
   font-size: 15px;
 }
 
-.tbody {
-  margin-left: 100 px;
-  padding: 100 px;
-  color: lightgoldenrodyellow;
-  text-align: center;
+button:hover{background-color:orange;}
+
+button:active, input:active{
+  background-color:red;
+  box-shadow: inset -4px -4px 0 #FAB89B, inset 4px 4px 0 #965117;
+}
+
+ul {
+  padding: 1.5rem;
+
+}
+
+table {
+  empty-cells: show;
 }
 
 @keyframes App-logo-spin {

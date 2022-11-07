@@ -64,20 +64,21 @@ function ListedGames({lists}){
   },[])
 
   const showGames2 = games2.map((gameObj)=>
-  <div >
-    <li key={gameObj.id} style={{}}>{gameObj.title} 
+  <div style={{textAlign: "right"}}>
+    <li key={gameObj.id} style={{textAlign: "right"}}>{gameObj.title} 
     <button onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button></li>
   
   </div>
   )
   
   return(
-    <div>   
+    <div >   
     
-    <tbody>
-      <td >{showGames1}</td>
+    <tbody >
+      <td style={{paddingLeft: "auto"}}>{showGames1}</td>
       <br></br>
-      <td style={{padding: "100 rem"}} >{showGames2}</td>
+      
+      <td style={{paddingRight: "auto"}}>{showGames2}</td>
     </tbody>
     </div>
   )

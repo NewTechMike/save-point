@@ -13,7 +13,7 @@ function Home(){
   const [editBio, setEditBio] = useState(false)
   const [homeCount, setHomeCount] = useState(0)
   
-  console.log("home user: ", user)
+ /*  console.log("home user: ", user)
 
   function handleUpdateSubmit(e){
     e.preventDefault()
@@ -67,57 +67,20 @@ function Home(){
     setTimeout(()=>{
       checkRender()
     }, 250)
-  }
+  } */
 
   if(loggedIn){
   return(
     <div>
-
       <h1>Welcome to your Home Page, { user.username }</h1>
-      <br></br>
-     <p> From: </p>    
-      {editLoc ? <input 
-        
-        defaultValue={`${user.location}`}
-        onChange={(e) => setNewLocation(e.target.value)}
-        /> :
-        <div>
-        <p>{user.location}</p>
-        </div>
-        }
-      <form onClick={handleUpdateSubmit}>
-      <input 
-        type="button" 
-        value={`${editLocButton}`}
-        onClick={handleEditLocClick}>
-      </input>
-      
-      </form>
-       <br></br>
-        <p>About: </p>
-        
-        {editBio ? <textarea 
-          defaultValue={`${user.bio}`}
-          onChange={(e)=>setNewBio(e.target.value)}
-          ></textarea>:
-        <div>
-         <p>{user.bio}</p> 
-        </div>
-        }
-        <form onClick={handleUpdateSubmit}>
-      <input 
-        type="button" 
-        value={`${editBioButton}`}
-        onClick={handleEditBioClick}>
-      </input>
-      </form>
-      <div>
-        <button 
-          
-          onClick={()=>handleDelete(user)}
-          >Delete</button>
-        </div>
-          <br></br>
+     
+      <div style={{textAlign:"left", color: "yellow"}}>
+        From:{" "}
+        {user.location}
+        <br></br>
+        About:{" "}
+        {user.bio}
+      </div>
           <br></br>
       <List  />
     </div>

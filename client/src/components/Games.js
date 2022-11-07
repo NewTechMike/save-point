@@ -113,7 +113,7 @@ function Games(){
       setTimeout (() => {
    
        setTheRawgGames(rawgGames.map((rawgData) => 
-        <ul key={rawgData.id}>
+        <ul key={rawgData.id} >
           <img src={rawgData.background_image} style={{}}/>
           <li>{rawgData.name}</li>   
           <li>Platform: {rawgData.parent_platforms[0].platform.name}</li>
