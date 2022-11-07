@@ -19,7 +19,9 @@ function List(){
   },[])
 
   const showLists = lists.map((listObj) => 
-    <span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span>
+  <td>
+    <span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span>    
+    </td>
   )
 
   if(lists.length > 0 && gameCount === 0){
@@ -48,8 +50,10 @@ function checkRender(){
 }
   const showGames = games.map((gameObj) => 
   <div >
-    <li key={"a"+gameObj.id} style={{textAlign: "left"}}>{gameObj.title}{" "}
-    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li>
+      
+    <li key={"a"+gameObj.id} style={{}}>{gameObj.title}{" "}
+    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li> 
+    
   </div>
   ) 
   
@@ -87,9 +91,14 @@ function checkRender(){
       <br></br>
       <h4>Click on the Games button and start adding to your lists</h4>
       <br></br>
-      {showLists} 
-      {showGames}      
+      <thead>
+      <th>{showLists} </th>
+      </thead>
+        <br></br>
+      <tbody>
+      <td>{showGames} </td>
       <ListedGames lists={lists} />
+      </tbody>
     </div>
   )
   } else {

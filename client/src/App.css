@@ -1,12 +1,3 @@
-li {
-  
-  color:#eb1414e1;
-  -webkit-text-stroke-width: .25px;
-  -webkit-text-stroke-color: pink;
-  font-size: larger;
-  grid-column-start: auto;
-  
-}
 
 body {
   background-image: url("./images/greencontrollers.webp");
@@ -45,6 +36,16 @@ span {
 .App {
   text-align: center;
   
+}
+
+li {
+  
+  color:#ce0707e1;
+  -webkit-text-stroke-width: .25px;
+  -webkit-text-stroke-color: pink;
+  font-size: larger;
+  padding: 100 rem ;
+  text-align: center;
 }
 
 img {
@@ -110,6 +111,13 @@ button {
   background-color:rgba(158, 9, 108, 0.288);
   border: none;
   font-size: 15px;
+}
+
+.tbody {
+  margin-left: 100 px;
+  padding: 100 px;
+  color: lightgoldenrodyellow;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

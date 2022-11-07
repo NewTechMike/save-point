@@ -49,8 +49,12 @@ function ListedGames({lists}){
   }
   
   const showGames1 = games1.map((gameObj)=>
-    <li key={gameObj.id} style={{textAlign: "center"}}>{gameObj.title}
+  <table style={{}}>
+    <tr>
+    <li key={gameObj.id} style={{}}>{gameObj.title}
     <button onClick={()=>handleRemoveStartGame(gameObj.id)}>X</button></li>
+    </tr>
+    </table>
   )
 
   useEffect(()=>{
@@ -61,7 +65,7 @@ function ListedGames({lists}){
 
   const showGames2 = games2.map((gameObj)=>
   <div >
-    <li key={gameObj.id} style={{textAlign: "right"}}>{gameObj.title} 
+    <li key={gameObj.id} style={{}}>{gameObj.title} 
     <button onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button></li>
   
   </div>
@@ -69,10 +73,12 @@ function ListedGames({lists}){
   
   return(
     <div>   
-    <br></br>
-      {showGames1}
-      {showGames2}
-
+    
+    <tbody>
+      <td >{showGames1}</td>
+      <br></br>
+      <td style={{padding: "100 rem"}} >{showGames2}</td>
+    </tbody>
     </div>
   )
 }
