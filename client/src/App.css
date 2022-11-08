@@ -18,6 +18,7 @@ h2 {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(16, 166, 212);
 }
+
 h3 {
   color: rgb(221, 189, 7);
   text-shadow: 2px 2px rgba(65, 110, 233, 0.87);
@@ -35,11 +36,9 @@ span {
 
 .App {
   text-align: center;
-  
 }
 
 li {
-  
   color:#ce0707e1;
   -webkit-text-stroke-width: .50px;
   -webkit-text-stroke-color: pink;
@@ -63,7 +62,6 @@ img {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -123,11 +121,23 @@ button:active, input:active{
 
 ul {
   padding: 1.5rem;
+}
 
+td {
+  text-align: center;
 }
 
 table {
   empty-cells: show;
+  table-layout: fixed;
+  width: 69%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.showgames2 {
+  color: blue
 }
 
 @keyframes App-logo-spin {

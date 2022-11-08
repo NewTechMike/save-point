@@ -49,11 +49,9 @@ function checkRender(){
     .then((data)=>setGames(data))
 }
   const showGames = games.map((gameObj) => 
-  <div >
-      
-    <li key={"a"+gameObj.id} style={{}}>{gameObj.title}{" "}
+  <div >   
+    <li key={"a"+gameObj.id}>{gameObj.title}{" "}
     <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li> 
-    
   </div>
   ) 
   
@@ -88,20 +86,20 @@ function checkRender(){
   if(lists.length > 0){
   return(
     <div >
-      <br></br>
-      <h4>Click on the Games button and start adding to your lists</h4>
-      <br></br>
-      <thead>
-      <th>{showLists} </th>
-      </thead>
-      <div style={{paddingLeft: "2rem"}}>
-      <table class="table">
         <br></br>
-      <tbody>
-      <td>{showGames} </td>
-      <ListedGames lists={lists} />
-      </tbody>
-      </table>
+      <h4>Click on the Games button and start adding to your lists</h4>
+        <br></br>
+      <thead>
+        <th>{showLists} </th>
+      </thead>
+      <div >
+        <table class="table">
+          <br></br>
+          <tbody>
+            <td >{showGames} </td>
+            <ListedGames lists={lists} />
+          </tbody>
+        </table>
       </div>
     </div>
   )
