@@ -1,3 +1,6 @@
+.showgames2 {
+  color: blue
+}
 
 body {
   background-image: url("./images/greencontrollers.webp");
@@ -132,13 +135,11 @@ table {
   table-layout: fixed;
   width: 69%;
   white-space: nowrap;
+  word-wrap: break-word;
   text-overflow: ellipsis;
-  text-align: center;
+  text-align: right;
 }
 
-.showgames2 {
-  color: blue
-}
 
 @keyframes App-logo-spin {
   from {

@@ -62,15 +62,15 @@ function ListedGames({lists}){
   },[])
 
   const showGames2 = games2.map((gameObj)=>
-  <div class="showgames2">
-    <li key={gameObj.id} >{gameObj.title} 
+  <div >
+    <li key={gameObj.id} style={{paddingLeft: "10rem"}}>{gameObj.title} 
     <button onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button></li>
     </div>
   )
   
   return(
     <div >   
-      <table class="table" > 
+      <table class="table"  > 
         <tbody >
           <td >{showGames1}</td>
             <br></br>
