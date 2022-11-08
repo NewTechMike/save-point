@@ -153,11 +153,11 @@ function Profile(){
         </div>
         }
       <form onClick={handleUpdateSubmit}>
-      <input 
+      <button 
         type="button" 
         value={`${editLocButton}`}
-        onClick={handleEditLocClick}>
-      </input>
+        onClick={handleEditLocClick}>{editLocButton}
+      </button>
       
       </form>
        <br></br>
@@ -172,11 +172,11 @@ function Profile(){
         </div>
         }
         <form onClick={handleUpdateSubmit}>
-      <input 
+      <button 
         type="button" 
         value={`${editBioButton}`}
-        onClick={handleEditBioClick}>
-      </input>
+        onClick={handleEditBioClick}>{editBioButton}
+      </button>
       </form>
       <div>
         <button 

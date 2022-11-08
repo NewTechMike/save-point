@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { UserContext } from '../context/user'
 
-
 function NavBar(){
   const history = useHistory()
   const { setUser, setLoggedIn } = useContext(UserContext);
@@ -19,16 +18,6 @@ function NavBar(){
     setLoggedIn(false)
     history.push('/login')
   }
-
-  /**<NavLink
-        to="/users"
-        activeStyle={{
-            background: "darkblue",
-        }}>
-        <button type="button">
-          Users
-        </button>
-      </NavLink> */
 
   return(
     <div>

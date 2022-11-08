@@ -63,10 +63,8 @@ if(!loggedIn){
           /> <br/>
 
       {errors.length > 0 && (
-        <ul style={{color: "red"}}>
-          
+        <ul style={{color: "red"}}>  
             <li key={errors}>{errors}</li>
-            
         </ul>
       )}
   

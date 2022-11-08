@@ -3,14 +3,12 @@ import {UserContext} from '../context/user'
 import ListedGames from './ListedGames';
 
 function List(){
-  const {user, setUser, loggedIn} = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const [lists, setLists] = useState([])
   const [games, setGames] = useState([])  
   const [gameCount, setGameCount] = useState(0)
   const [count, setCount] = useState(0)
-  const [check, setCheck] = useState([])
   const [gen, setGen] = useState(false)
-  const [clicked, setClicked] = useState(false)
   
   useEffect(()=>{
     fetch('/lists')
@@ -19,9 +17,7 @@ function List(){
   },[])
 
   const showLists = lists.map((listObj) => 
-  <td>
-    <span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span>    
-    </td>
+    <td><span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span></td>
   )
 
   if(lists.length > 0 && gameCount === 0){
@@ -77,7 +73,6 @@ function checkRender(){
     .then((listData)=>setLists(listData))
   }
 
-
   if(lists.length > 0 && count === 0){
     setGen(true)
     setCount(1)
@@ -87,7 +82,7 @@ function checkRender(){
   return(
     <div >
         <br></br>
-      <h4>Click on the Games button and start adding to your lists</h4>
+      <h4>Click "Games" and start adding to your lists</h4>
         <br></br>
       <thead>
         <th>{showLists} </th>

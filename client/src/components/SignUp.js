@@ -57,7 +57,7 @@ function SignUp (){
   if(!loggedIn){
   return(
     <div>
-      <h1>Welcome to SignUp Page</h1>
+      <h1>Welcome to the SignUp Page</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="username" style={{color: "gold"}}>Username: </label>

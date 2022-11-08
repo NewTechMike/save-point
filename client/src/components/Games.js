@@ -149,7 +149,7 @@ function Games(){
   return (
     <div>
       <h1>Welcome to the Games Page, {user.username}</h1>
-      <h4>When you're done adding games, click the Home button to see your list</h4>
+      <h4>When you're done adding games, click "Home" to see your list</h4>
       <ul>{theRawgGames}</ul>
       <ul>{theGames}</ul>
     </div>

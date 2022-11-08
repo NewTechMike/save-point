@@ -1,7 +1,5 @@
-.showgames2 {
-  color: blue
-}
 
+  
 body {
   background-image: url("./images/greencontrollers.webp");
   background-repeat: no-repeat;
@@ -106,7 +104,7 @@ header {
   color:rgb(4, 180, 4);
 }
 
-button, input {
+button {
   color:white;
   background-color: #F88D2E;
   box-shadow: inset -4px -4px 0 #965117, inset 4px 4px 0 #FAB89B;

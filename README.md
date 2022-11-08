@@ -8,9 +8,9 @@
 # Features
 - The user will be able to:
   - Sign up for a new account
-  - Create and edit a profile
+  - Create and edit a bio
   - Add video games to any three generated lists 
-  - Be able to order or delete items from said list
+  - Be able to add to or delete items from said list
 
 # Deployed
 * The app has been deployed on heroku at https://save--point.herokuapp.com/
