@@ -12,7 +12,7 @@ function Home(){
     <div>
       <h1>Welcome to your Home Page, { user.username }</h1>
      
-      <div style={{textAlign:"left", color: "yellow", paddingLeft: "5rem"}}>
+      <div id="userInfo" >
         From:{" "}
         {user.location}
         <br></br>
