@@ -80,7 +80,7 @@ function checkRender(){
  
   if(lists.length > 0){
   return(
-    <div >
+    <div id="wrapper">
         <br></br>
       <h4>Click "Games" and start adding to your lists</h4>
         <br></br>

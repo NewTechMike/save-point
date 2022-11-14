@@ -9,7 +9,7 @@ function Users(){
   useEffect(()=>{
     fetch('/users')
     .then((r)=>r.json())
-    .then((userList)=>setUsers(userList))
+    .then((userList)=>console.log("UL: ", userList))
   }, [])
 
   const ListOfUsers = users.map((userData) =>
