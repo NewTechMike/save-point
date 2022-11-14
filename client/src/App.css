@@ -128,6 +128,10 @@ td {
   text-align: center;
 }
 
+thead {
+  table-layout: fixed;
+}
+
 table {
   empty-cells: show;
   table-layout: fixed;
