@@ -3,7 +3,10 @@ import { UserContext } from '../context/user'
 
 function Games(){
   const { user, loggedIn } = useContext(UserContext);
-  const [gameList, setGameList ] = useState([]) 
+  const [gameList, setGameList] = useState([]) 
+  const [showWant, setShowWant] = useState(true)
+  const [showStart, setShowStart] = useState(true)
+  const [showReplay, setShowReplay] = useState(true)
   const [rawgGames, setRawgGames]= useState([{
     title: "", 
     platform: [""],
@@ -18,11 +21,11 @@ function Games(){
       .then((gameData) => setRawgGames(gameData.results))
   },[])
 
-    useEffect(()=>{
+    /* useEffect(()=>{
       fetch('/games')
       .then((r)=>r.json())
       .then((gameData)=>setGameList(gameData))
-    },[])
+    },[]) */
 
     const theGames =  gameList.map((gameItem) =>
       <ul key={gameItem.id}>
@@ -52,7 +55,8 @@ function Games(){
       </ul>
     )
   
-    function handleWantClick(name, platform, genre, release_date, cover_art){
+    function handleWantClick(id, name, platform, genre, release_date, cover_art){
+      
       fetch(`${user.id}/lists/${"Want to Play"}`, {
         method: "PATCH", 
         headers: {
@@ -68,10 +72,27 @@ function Games(){
         })
       })
       .then((r)=>r.json())
-      .then((data)=>console.log(data))
+      .then((data)=>console.log("Want list: ",data))
+      hideWant(id);
+      {showWant ? console.log("2",showWant) : console.log("false", id)}
     }
 
-    function handleStartClick(name, platform, genre, release_date){
+     function hideWant(id){
+      setShowStart(true)
+      setShowReplay(true)
+      setShowWant(false);
+      console.log("Why!!!!")
+      {showWant ? console.log("1",showWant) : console.log("false", id)}
+      checkRender();
+    } 
+
+    function checkRender(){
+        fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
+          .then((r)=> r.json())
+          .then((gameData) => setRawgGames(gameData.results))
+    }
+
+    function handleStartClick(id, name, platform, genre, release_date){
       fetch(`${user.id}/lists/${"Started Playing"}`, {
         method: "PATCH", 
         headers: {
@@ -86,10 +107,20 @@ function Games(){
         })
       })
       .then((r)=>r.json())
-      .then((data)=>console.log(data))
+      .then((data)=>console.log("Start List: ", data)) 
+      hideStart(id);
     }
 
-    function handleReplayClick(name, platform, genre, release_date){
+    function hideStart(id){
+      setShowWant(true);
+      setShowReplay(true);
+      setShowStart(false);
+      console.log("Why!!!!")
+      {showStart ? console.log("1",showStart) : console.log("false", id)}
+      checkRender();
+    } 
+
+    function handleReplayClick(id, name, platform, genre, release_date){
       fetch(`${user.id}/lists/${"To Replay"}`, {
         method: "PATCH", 
         headers: {
@@ -104,14 +135,22 @@ function Games(){
         })
       })
       .then((r)=>r.json())
-      .then((data)=>console.log(data))
+      .then((data)=>console.log("Replay List: ", data))
+      hideReplay(id);
     }
+
+    function hideReplay(id){
+      setShowWant(true);
+      setShowStart(true);
+      setShowReplay(false);
+      console.log("Why!!!!")
+      {showReplay ? console.log("1",showReplay) : console.log("false", id)}
+      checkRender();
+    } 
 
     const [theRawgGames, setTheRawgGames] = useState([]);
     useEffect(()=>{
-    
       setTimeout (() => {
-   
        setTheRawgGames(rawgGames.map((rawgData) => 
         <ul key={rawgData.id} >
           <img src={rawgData.background_image} style={{}}/>
@@ -120,29 +159,43 @@ function Games(){
           <li>/ {rawgData.parent_platforms[1].platform.name}</li>
           <li>Release Date: {rawgData.released}</li>
           <li>Genre: {rawgData.genres[0].name}</li>
-          <button onClick={() => handleWantClick(
+
+          {showWant ? 
+          <button 
+            key={rawgGames.id} 
+            className={showWant ? "wantButton" : "wantButtonHidden"}
+            onClick={() => handleWantClick(
+            rawgData.id,
             rawgData.name,
             rawgData.parent_platforms[0].platform.name,
             rawgData.genres[0].name,
             rawgData.released,
             rawgData.background_image
             )}>Want to Play</button>
+          : " "}
+
+          {showStart ?
           <button onClick={()=>handleStartClick(
+            rawgData.id,
             rawgData.name,
             rawgData.parent_platforms[0].platform.name,
             rawgData.genres[0].name,
             rawgData.released,
           )}>Started Playing</button>
+          : " "}
+
+          {showReplay ?
           <button onClick={()=>handleReplayClick(
+            rawgData.id,
             rawgData.name,
             rawgData.parent_platforms[0].platform.name,
             rawgData.genres[0].name,
             rawgData.released,
           )}>To Replay</button>
+          : " "} 
+
         </ul>)) 
-   
       },25) 
-    
     }, [rawgGames])
 
   if(loggedIn){

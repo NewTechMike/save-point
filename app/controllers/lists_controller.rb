@@ -47,7 +47,7 @@ def show_games_in_list
   user = User.find_by(id: params[:user_id])
   list = user.lists.find_by(id: params[:list_id])
   if list 
-    render json: list.games
+    render json: list.games, unique: true
   else
     render json: {errors: "Not found"}, status: :not_found
   end
