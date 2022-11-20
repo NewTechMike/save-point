@@ -17,7 +17,7 @@ function List(){
   },[])
 
   const showLists = lists.map((listObj) => 
-    <td><span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span></td>
+    <span key={listObj.id} style={{margin: '6rem'}}>{"   "}&nbsp;{listObj.list_name}&nbsp;{"   "}</span>
   )
 
   if(lists.length > 0 && gameCount === 0){
@@ -84,14 +84,14 @@ function checkRender(){
         <br></br>
       <h4>Click "Games" and start adding to your lists</h4>
         <br></br>
-      <thead>
+      
         <th>{showLists} </th>
-      </thead>
+      
       <div >
-        <table class="table">
           <br></br>
+        <table class="table">
           <tbody>
-            <td >{showGames} </td>
+            <td>{showGames} </td>
             <ListedGames lists={lists} />
           </tbody>
         </table>
