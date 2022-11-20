@@ -65,7 +65,8 @@ function Games(){
       .then((r)=>{ 
         if(!r.ok){
         r.json().then((data)=>console.log("Want list: ",data))
-        alert("Added to Want List")}
+        //alert("Added to Want List")
+        }
        else {
         r.json().then((errorData) => setErrors(errorData.errors))
         alert("Already Added to List") 
@@ -90,7 +91,8 @@ function Games(){
       .then((r)=>{ 
         if(!r.ok){
         r.json().then((data)=>console.log("Start list: ",data))
-        alert("Added to Started List")}
+        //alert("Added to Started List")
+        }
        else {
         r.json().then((errorData) => setErrors(errorData.errors))
         alert("Already Added to List")}
@@ -114,7 +116,7 @@ function Games(){
       .then((r)=>{ 
         if(!r.ok){
         r.json().then((data)=>console.log("Replay list: ",data))
-          alert("Added to Replay List")
+          //alert("Added to Replay List")
       } else {
         r.json().then((errorData) => setErrors(errorData.errors))
         alert("Already Added to List")  
@@ -171,11 +173,7 @@ function Games(){
       <h4>When you're done adding games, click "Home" to see your list</h4>
       <ul>{theRawgGames}</ul>
       <ul>{theGames}</ul>   
-      {errors.length > 0 && (
-        <ul style={{color: "red"}}>  
-            <li key={errors}>{errors}</li>
-        </ul>
-      )}
+      
     </div>
   )} else {
     return(
