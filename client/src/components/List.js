@@ -84,9 +84,7 @@ function checkRender(){
         <br></br>
       <h4>Click "Games" and start adding to your lists</h4>
         <br></br>
-      
         <th>{showLists} </th>
-      
       <div >
           <br></br>
         <table class="table">
