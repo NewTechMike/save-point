@@ -17,8 +17,7 @@ function Welcome(){
         <p>
           Here you will be able move games to lists 
           that you Want to play, started playing and want to replay
-          </p>
-          
+        </p>        
         <h3>Please Login or Sign Up</h3></div>
     )
   }

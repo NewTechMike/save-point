@@ -21,7 +21,7 @@ function NavBar(){
 
   return(
     <div>
-
+     
       <NavLink
       bg="light"
       variant="dark"
@@ -32,8 +32,7 @@ function NavBar(){
           >SavePoint</NavLink>
 
       <NavLink
-        to="/home"
-       
+        to="/home"      
         activeStyle={{
           color: "lightblue",
         }}>Home</NavLink>

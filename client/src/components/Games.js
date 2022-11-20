@@ -21,7 +21,7 @@ function Games(){
 
     const theGames =  gameList.map((gameItem) =>
       <ul key={gameItem.id}>
-        <img src={gameItem.cover_art} style={{}}/>
+        <img src={gameItem.cover_art} alt={gameItem.cover_art}/>
         <li>{gameItem.title} </li>
         <li> Platform: {gameItem.platform}</li>
         <li> Release Date: {gameItem.release_date}</li>
@@ -69,7 +69,7 @@ function Games(){
         }
        else {
         r.json().then((errorData) => setErrors(errorData.errors))
-        alert("Already Added to List") 
+        //alert("Already Added to List") 
         }
       });
     }
@@ -95,7 +95,8 @@ function Games(){
         }
        else {
         r.json().then((errorData) => setErrors(errorData.errors))
-        alert("Already Added to List")}
+        //alert("Already Added to List")
+      }
       });
     }
 
@@ -119,7 +120,7 @@ function Games(){
           //alert("Added to Replay List")
       } else {
         r.json().then((errorData) => setErrors(errorData.errors))
-        alert("Already Added to List")  
+       // alert("Already Added to List")  
       }
       });
     }
@@ -129,7 +130,7 @@ function Games(){
       setTimeout (() => {
        setTheRawgGames(rawgGames.map((rawgData) => 
         <ul key={rawgData.id} >
-          <img src={rawgData.background_image} style={{}}/>
+          <img src={rawgData.background_image} alt={rawgData.background_image}/>
           <li>{rawgData.name}</li>   
           <li>Platform: {rawgData.parent_platforms[0].platform.name}</li>
           <li>/ {rawgData.parent_platforms[1].platform.name}</li>

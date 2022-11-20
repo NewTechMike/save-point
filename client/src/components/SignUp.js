@@ -8,12 +8,10 @@ function SignUp (){
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([])
   const history = useHistory();
-
   const { user, setUser, loggedIn, setLoggedIn } = useContext(UserContext);
 
   function handleSubmit(e){
     e.preventDefault()
-
     fetch('/signup', {
       method: "POST", 
       headers: {
@@ -36,6 +34,7 @@ function SignUp (){
       }
     })
   }
+  
   function goProfile(){
     if(loggedIn){
       console.log(loggedIn)
@@ -52,7 +51,6 @@ function SignUp (){
       }, 250);
     }
   }
-  console.log("errors: ", errors)
   
   if(!loggedIn){
   return(

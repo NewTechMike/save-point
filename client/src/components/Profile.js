@@ -6,11 +6,18 @@ function Profile(){
   const {user, setUser, loggedIn, setLoggedIn} = useContext(UserContext);
   const [newLoc, setNewLoc] = useState("")
   const [newBio, setNewBio] = useState("")
+  const [newLocation, setNewLocation] = useState("")
+  const [info, setInfo] = useState(false)
+  const [editLoc, setEditLoc] = useState(false)
+  const [editBio, setEditBio] = useState(false)
+  const [editLocButton, setEditLocButton] = useState("Edit")
+  const [editBioButton, setEditBioButton] = useState("Edit")
+  
+  const [homeCount, setHomeCount] = useState(0)
   const history = useHistory();
 
   function handleSubmit(e){
-    e.preventDefault()
-    
+    e.preventDefault() 
     if(user.location === null && user.bio === null){  
       fetch('/me', {
         method: "POST", 
@@ -21,7 +28,6 @@ function Profile(){
       })
       .then((r)=>r.json())
       .then((data)=> setUser(data)) 
-      console.log("Profile info Submitted")
       setTimeout(()=>{
       goHome()
     }, 500)
@@ -37,26 +43,15 @@ function Profile(){
         history.push('/home');
       }, 1000);
     } else {
-    setLoggedIn(true)
-    console.log("P user 2: ", user)
-    setTimeout (()=>{
-      history.push('/home');
-    }, 1000);
-
+      setLoggedIn(true)
+      setTimeout (()=>{
+        history.push('/home');
+      }, 1000);
     }
   }
 
-  const [newLocation, setNewLocation] = useState("")
-  const [info, setInfo] = useState(false)
-  const [editLoc, setEditLoc] = useState(false)
-  const [editBio, setEditBio] = useState(false)
-  const [homeCount, setHomeCount] = useState(0)
-  
-  console.log("home user: ", user)
-
   function handleUpdateSubmit(e){
-    e.preventDefault()
-    
+    e.preventDefault()   
       if(editLoc === true || editBio === true){  
       setHomeCount(homeCount+1)
       fetch('/me', {
@@ -82,9 +77,6 @@ function Profile(){
     .then(setUser)
   }
 
-  const [editLocButton, setEditLocButton] = useState("Edit")
-  const [editBioButton, setEditBioButton] = useState("Edit")
-  
   function handleEditLocClick(){
     setEditLoc(!editLoc)
     {editLoc ? setEditLocButton("Edit"): setEditLocButton("Save")}
@@ -108,9 +100,6 @@ function Profile(){
     }, 250)
   }
  
-
-
-
   if(loggedIn){
   if(user.location === null && user.bio === null){
     return (
@@ -143,8 +132,7 @@ function Profile(){
     return (
       <div style={{color: "orange"}}> 
         <p> From: </p>    
-      {editLoc ? <textarea 
-        
+      {editLoc ? <textarea       
         defaultValue={`${user.location}`}
         onChange={(e) => setNewLocation(e.target.value)}
         /> :
@@ -179,8 +167,7 @@ function Profile(){
       </button>
       </form>
       <div>
-        <button 
-          
+        <button   
           onClick={()=>handleDelete(user)}
           >Delete</button>
       </div>
