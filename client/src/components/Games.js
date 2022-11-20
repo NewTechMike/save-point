@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
-import Button from "./Button";
-
 
 function Games(){
   const { user, loggedIn } = useContext(UserContext);
@@ -69,15 +67,12 @@ function Games(){
       })
       .then((r)=>r.json())
       .then((data)=>console.log("Want list: ",data))
-      hideWant(id);
-      {showWant ? console.log("2",showWant) : console.log("false", id)}
-    }
+      }
 
      function hideWant(id){
       setShowStart(true)
       setShowReplay(true)
       setShowWant(false);
-      console.log("Why!!!!")
       {showWant ? console.log("1",showWant) : console.log("false", id)}
       checkRender();
     } 
@@ -104,14 +99,12 @@ function Games(){
       })
       .then((r)=>r.json())
       .then((data)=>console.log("Start List: ", data)) 
-      hideStart(id);
     }
 
     function hideStart(id){
       setShowWant(true);
       setShowReplay(true);
       setShowStart(false);
-      console.log("Why!!!!")
       {showStart ? console.log("1",showStart) : console.log("false", id)}
       checkRender();
     } 
@@ -132,14 +125,12 @@ function Games(){
       })
       .then((r)=>r.json())
       .then((data)=>console.log("Replay List: ", data))
-      hideReplay(id);
     }
 
     function hideReplay(id){
       setShowWant(true);
       setShowStart(true);
       setShowReplay(false);
-      console.log("Why!!!!")
       {showReplay ? console.log("1",showReplay) : console.log("false", id)}
       checkRender();
     } 
