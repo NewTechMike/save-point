@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
+import Button from "./Button";
+
 
 function Games(){
   const { user, loggedIn } = useContext(UserContext);
@@ -20,12 +22,6 @@ function Games(){
       .then((r)=> r.json())
       .then((gameData) => setRawgGames(gameData.results))
   },[])
-
-    /* useEffect(()=>{
-      fetch('/games')
-      .then((r)=>r.json())
-      .then((gameData)=>setGameList(gameData))
-    },[]) */
 
     const theGames =  gameList.map((gameItem) =>
       <ul key={gameItem.id}>
@@ -162,7 +158,6 @@ function Games(){
 
           {showWant ? 
           <button 
-            key={rawgGames.id} 
             className={showWant ? "wantButton" : "wantButtonHidden"}
             onClick={() => handleWantClick(
             rawgData.id,

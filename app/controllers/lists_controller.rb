@@ -33,14 +33,24 @@ class ListsController < ApplicationController
 
  def add_game_to_list
   user = User.find_by(id: params[:user_id])
-  list = user.lists.find_by(list_name: params[:list_name])
-  game = Game.create(game_params)
-  if list
-    list.games << game
-    render json: list.games, status: :accepted
+  want = user.lists.find_by(list_name: "Want to Play")
+  game1 = want.games.find_by(title: params[:title])
+  start = user.lists.find_by(list_name: "Started Playing")
+  game2 = start.games.find_by(title: params[:title])
+  replay = user.lists.find_by(list_name: "To Replay")
+  game3 = replay.games.find_by(title: params[:title])
+  if game1 || game2 || game3
+    render json: {errors: "Already in List"}
   else
-    render json: {errors: "Not found"}, status: :not_found
-  end
+   list = user.lists.find_by(list_name: params[:list_name])
+   game = Game.create(game_params)
+    if list 
+      list.games << game
+      render json: list.games, status: :accepted, unique: true
+    else
+      render json: {errors: "Not found"}, status: :not_found
+    end
+  end 
 end
 
 def show_games_in_list
