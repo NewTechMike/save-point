@@ -100,10 +100,9 @@ function checkRender(){
   )
   } else {
     return (
-      <div> 
-
+      <div>
         {gen ? null:
-      <button onClick={handleListClick}>Generate Lists</button>}
+        <button onClick={handleListClick}>Generate Lists</button>}
       </div>
     )
   }

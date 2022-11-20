@@ -24,6 +24,13 @@ function Button({id, title, platform, genres, released, background, show}){
     })
     setShowWant(false)
   }
+  /** function hideWant(id){
+      setShowStart(true)
+      setShowReplay(true)
+      setShowWant(false);
+      {showWant ? console.log("1",showWant) : console.log("false", id)}
+      checkRender();
+    }  */
   if(!showWant){
   return(
     <div>

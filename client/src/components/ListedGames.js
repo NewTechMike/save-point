@@ -5,9 +5,6 @@ function ListedGames({lists}){
   const [games1, setGames1]= useState([])
   const [games2, setGames2]= useState([])
   const { user } = useContext(UserContext);
-
-  const [clicked, setClicked] = useState(false)
-  
  
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[1].id}`)
