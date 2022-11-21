@@ -28,11 +28,7 @@ h3 {
 h4 {
   color:rgb(16, 166, 212)
 }
-#wrapper {
-  margin-left:auto;
-  margin-right:auto;
-  width:960px;
-}
+
 span {
   color: rgb(4, 180, 4);
   text-align: center;
@@ -40,14 +36,6 @@ span {
 }
 
 .App {
-  text-align: center;
-}
-
-li {
-  color:#ce0707e1;
-  -webkit-text-stroke-width: .50px;
-  -webkit-text-stroke-color: pink;
-  font-size: larger;
   text-align: center;
 }
 
@@ -143,10 +131,16 @@ table {
   white-space: nowrap;
   word-wrap: break-word;
   text-overflow: ellipsis;
-  text-align: right;
+  text-align: center;
 }
 
-
+li {
+  color:#ce0707e1;
+  -webkit-text-stroke-width: .50px;
+  -webkit-text-stroke-color: pink;
+  font-size: larger;
+  text-align: center;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -174,3 +168,13 @@ table {
 #wantButtonHidden {
   display: none;
 }
+
+#wrapper {
+  margin-left:auto;
+  margin-right:auto;
+  width:960px;
+}
+
+/* #ReplayList {
+  align-content: right;
+} */

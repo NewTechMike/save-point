@@ -35,7 +35,7 @@ function List(){
     }
   })
   setTimeout(()=>{
-  checkRender()
+    checkRender()
   }, 250)
 }
 
@@ -46,10 +46,42 @@ function checkRender(){
 }
   const showGames = games.map((gameObj) => 
   <div >   
-    <li key={"a"+gameObj.id}>{gameObj.title}{" "}
-    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button></li> 
+    <li key={"a"+gameObj.id}>{gameObj.title}{" "}</li>
+    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button>
+    <button onClick={()=>handleMoveToStart(gameObj.id, 1, gameObj.title)}>S</button>
+    <button onClick={()=>handleMoveToReplay(gameObj.id, 1, gameObj.title)}>R</button>  
+     <div></div>
+     <br></br>
   </div>
   ) 
+
+  function handleMoveToStart(id, list, name){
+    if(list === 1){
+    handleRemoveWantGame(id)
+      setTimeout(()=>{
+        fetch(`${user.id}/lists/${"Started Playing"}`, {
+          method: "PATCH", 
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            list_id: 1, 
+            title: name
+          })
+        })
+      }, 1000)
+      console.log("Removed from Want, added to Start")
+    } else {
+    console.log("did not move")
+    }
+    setTimeout(()=>{
+      checkRender()
+    }, 250)
+  }
+  function handleMoveToReplay(){
+    console.log("Move To Replay")
+  }
+
   
   function handleListClick(){
     fetch(`/lists/${user.id}`, {
@@ -89,7 +121,7 @@ function checkRender(){
           <br></br>
         <table class="table">
           <tbody>
-            <td>{showGames} </td>
+            <td>{showGames}</td>
             <ListedGames lists={lists} />
           </tbody>
         </table>

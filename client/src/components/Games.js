@@ -5,6 +5,9 @@ function Games(){
   const { user, loggedIn } = useContext(UserContext);
   const [gameList, setGameList] = useState([]) 
   const [errors, setErrors] = useState([])
+  const [showWant, setShowWant] = useState(true)
+  const [showStart, setShowStart] = useState(true)
+  const [showReplay, setShowReplay] = useState(true)
   const [rawgGames, setRawgGames]= useState([{
     title: "", 
     platform: [""],
@@ -72,7 +75,16 @@ function Games(){
         //alert("Already Added to List") 
         }
       });
+      hideWant(id)
     }
+
+    function hideWant(id){
+      setShowStart(true)
+      setShowReplay(true)
+      setShowWant(false);
+      //{showWant ? console.log("1",showWant) : console.log("false", id)}
+      checkRender();
+    } 
 
     function handleStartClick(id, name, platform, genre, release_date){
       fetch(`${user.id}/lists/${"Started Playing"}`, {
@@ -98,7 +110,16 @@ function Games(){
         //alert("Already Added to List")
       }
       });
+      hideStart(id)
     }
+
+    function hideStart(id){
+      setShowStart(false)
+      setShowReplay(true)
+      setShowWant(true);
+      //{showWant ? console.log("1",showWant) : console.log("false", id)}
+      checkRender();
+    } 
 
     function handleReplayClick(id, name, platform, genre, release_date){
       fetch(`${user.id}/lists/${"To Replay"}`, {
@@ -123,6 +144,21 @@ function Games(){
        // alert("Already Added to List")  
       }
       });
+      hideReplay(id)
+    }
+
+    function hideReplay(id){
+      setShowStart(true)
+      setShowReplay(false)
+      setShowWant(true);
+      //{showWant ? console.log("1",showWant) : console.log("false", id)}
+      checkRender();
+    } 
+
+    function checkRender(){
+      fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
+      .then((r)=> r.json())
+      .then((gameData) => setRawgGames(gameData.results))
     }
 
     const [theRawgGames, setTheRawgGames] = useState([]);
@@ -137,6 +173,7 @@ function Games(){
           <li>Release Date: {rawgData.released}</li>
           <li>Genre: {rawgData.genres[0].name}</li>
  
+          {showWant ? 
           <button 
             onClick={() => handleWantClick(
             rawgData.id,
@@ -146,7 +183,9 @@ function Games(){
             rawgData.released,
             rawgData.background_image
             )}>Want to Play</button>
-        
+            :" "}
+
+          {showStart ?   
           <button onClick={()=>handleStartClick(
             rawgData.id,
             rawgData.name,
@@ -154,7 +193,9 @@ function Games(){
             rawgData.genres[0].name,
             rawgData.released,
           )}>Started Playing</button>
-          
+          :" "}
+
+          {showReplay ?
           <button onClick={()=>handleReplayClick(
             rawgData.id,
             rawgData.name,
@@ -162,7 +203,7 @@ function Games(){
             rawgData.genres[0].name,
             rawgData.released,
           )}>To Replay</button>
-
+          :" "}
         </ul>)) 
       },25) 
     }, [rawgGames])
