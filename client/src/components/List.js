@@ -6,6 +6,8 @@ function List(){
   const {user} = useContext(UserContext);
   const [lists, setLists] = useState([])
   const [games, setGames] = useState([])  
+  const [games1, setGames1] = useState([])  
+  const [games2, setGames2] = useState([])  
   const [gameCount, setGameCount] = useState(0)
   const [count, setCount] = useState(0)
   const [gen, setGen] = useState(false)
@@ -75,14 +77,19 @@ function checkRender(){
         })
       }, 300)
       console.log("Removed from Want, added to Start")
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     } else {
     console.log("did not move to start")
-    }
-    setForceRender([...forceRender, 0])
-    /* checkRender()
+    }  
     setTimeout(()=>{
-    }, 250) */
+      checkRender()
+      checkRender1()
+      checkRender2()
+    }, 400)
   }
 
   function handleMoveToReplay(id, list, name){
@@ -100,14 +107,19 @@ function checkRender(){
           })
         })
       }, 300)
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     } else {
       console.log("Did not Move To Replay")
     }
-
-    //checkRender()
-    /* setTimeout(()=>{
-    }, 250) */
+    setTimeout(()=>{
+      checkRender()
+      checkRender1()
+      checkRender2()
+    }, 400)
   }
   
   function handleListClick(){
@@ -130,6 +142,16 @@ function checkRender(){
     fetch('/lists')
     .then((r)=>r.json())
     .then((listData)=>setLists(listData))
+  }
+  function checkRender1(){
+    fetch(`${user.id}/lists/${lists[1].id}`)
+    .then((r)=>r.json())
+    .then((data)=>setGames1(data))
+  }
+  function checkRender2(){
+    fetch(`${user.id}/lists/${lists[2].id}`)
+    .then((r)=>r.json())
+    .then((data)=>setGames2(data))
   }
 
   if(lists.length > 0 && count === 0){

@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext} from 'react'
 import { UserContext} from "../context/user"
 
 function ListedGames({lists}){
-  const [games, setGames] = useState([]) 
+  const [games, setGames] = useState([])  
   const [games1, setGames1]= useState([])
   const [games2, setGames2]= useState([])
-  const [forceRender, setForceRender] = useState([])
+  const [numList, setNumList] = useState(0)
   const { user } = useContext(UserContext);
- 
+  
   useEffect(()=>{
     fetch(`${user.id}/lists/${lists[1].id}`)
       .then((r)=>r.json())
@@ -23,7 +23,7 @@ function ListedGames({lists}){
     })
     setTimeout(()=>{
       checkRender1()
-    }, 250)
+    }, 250) 
   }
   function checkRender1(){
     fetch(`${user.id}/lists/${lists[1].id}`)
@@ -39,7 +39,7 @@ function ListedGames({lists}){
     })
     setTimeout(()=>{
       checkRender2()
-    }, 250)
+    }, 250) 
   }
   function checkRender2(){
     fetch(`${user.id}/lists/${lists[2].id}`)
@@ -80,9 +80,9 @@ function ListedGames({lists}){
         "Content-Type": "application/json"
       }
     })
-    setTimeout(()=>{
+     setTimeout(()=>{
       checkRender()
-    }, 250)
+    }, 250) 
   }
 
   function handleMoveToWant(id, list, name){
@@ -100,8 +100,11 @@ function ListedGames({lists}){
           })
         })
       }, 300)
-      checkRender()
-      console.log("Removed from Replay, added to Want")
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     } else {
       handleRemoveStartGame(id);
       setTimeout(()=>{
@@ -116,24 +119,23 @@ function ListedGames({lists}){
           })
         })
       }, 300)
-      console.log("Removed from Start, added to Want")
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     }
-    /* setForceRender([...forceRender, 0])
-    console.log("It's been Moved to Want")
-    setTimeout(()=>{
-      console.log("Timeout is hit")
-      checkRender1()
-      checkRender2()
-    }, 300) */
   }
-
+  
+  
   function checkRender(){
-    console.log("check render hit")
+    console.log("3: check render hit")
     fetch(`${user.id}/lists/${lists[0].id}`)
-      .then((r)=>r.json())
-      .then((data)=>setGames(data))
-  }
+    .then((r)=> r.json())
+    .then((data)=>setGames(data))       
+    console.log("4: check render finished")
+   }
+
 
   function handleMoveToStart(id, list, name){
     if(list === 2){
@@ -149,9 +151,13 @@ function ListedGames({lists}){
             title: name
           })
         })
-      }, 300)
+      }, 250)
       console.log("Removed from Replay, added to Start")
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     } else {
       handleRemoveWantGame(id)
       setTimeout(()=>{
@@ -165,18 +171,14 @@ function ListedGames({lists}){
             title: name
           })
         })
-      }, 300)
+      }, 250)
       console.log("Removed from Want, added to Start")
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     }
-    setGames1(games1)
-    checkRender1()
-    setForceRender([...forceRender, 0])
-    /* setForceRender([...forceRender, 0])
-    setTimeout(()=>{
-      checkRender()
-      checkRender2()
-    }, 300) */
   }
 
   function handleMoveToReplay(id, list, name){
@@ -194,10 +196,19 @@ function ListedGames({lists}){
           })
         })
       }, 300)
-      checkRender()
+      setTimeout(()=>{
+        checkRender()
+        checkRender1()
+        checkRender2()
+      }, 400)
     } else { 
       console.log("Did not Move To Replay")
     }
+    setTimeout(()=>{
+      checkRender()
+      checkRender1()
+      checkRender2()
+    }, 400)
   }
 
   const showGames2 = games2.map((gameObj)=>
@@ -223,7 +234,7 @@ function ListedGames({lists}){
           <td>{showGames2}</td>
         </tbody>
       </table> 
-    <div>{forceRender}</div>
+      
     </div>
   )
 }
