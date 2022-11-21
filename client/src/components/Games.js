@@ -5,10 +5,6 @@ import GameCard from "./GameCard";
 function Games(){
   const { user, loggedIn } = useContext(UserContext);
   const [gameList, setGameList] = useState([]) 
-  const [errors, setErrors] = useState([])
-  const [showWant, setShowWant] = useState(true)
-  const [showStart, setShowStart] = useState(true)
-  const [showReplay, setShowReplay] = useState(true)
   const [rawgGames, setRawgGames]= useState([{
     title: "", 
     platform: [""],

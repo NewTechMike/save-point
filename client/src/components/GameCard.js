@@ -6,7 +6,7 @@ const [errors, setErrors] = useState([])
 const [showWant, setShowWant] = useState(true)
 const [showStart, setShowStart] = useState(true)
 const [showReplay, setShowReplay] = useState(true)
-const { user, loggedIn } = useContext(UserContext);
+const { user } = useContext(UserContext);
 
 function handleWantClick(id, name, platform, genre, release_date, cover_art){
   fetch(`${user.id}/lists/${"Want to Play"}`, {

@@ -6,12 +6,9 @@ function List(){
   const {user} = useContext(UserContext);
   const [lists, setLists] = useState([])
   const [games, setGames] = useState([])  
-  const [games1, setGames1] = useState([])  
-  const [games2, setGames2] = useState([])  
   const [gameCount, setGameCount] = useState(0)
   const [count, setCount] = useState(0)
   const [gen, setGen] = useState(false)
-  const [forceRender, setForceRender] = useState([])
   
   useEffect(()=>{
     fetch('/lists')
@@ -30,98 +27,6 @@ function List(){
     setGameCount(1)
   }
 
- function handleRemoveWantGame(id){
-  fetch(`${user.id}/lists/${"Want to Play"}/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  setTimeout(()=>{
-    checkRender()
-  }, 250)
-}
-
-function checkRender(){
-  fetch(`${user.id}/lists/${lists[0].id}`)
-    .then((r)=>r.json())
-    .then((data)=>setGames(data))
-}
-  const showGames = games.map((gameObj) => 
-  <div >   
-    <li key={"a"+gameObj.id}>{gameObj.title}{" "}</li>
-    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button>
-    <button 
-      style={{flexDirection: "row" ,marginLeft: 20}} 
-      onClick={()=>handleMoveToStart(gameObj.id, 0, gameObj.title)}>
-        Started</button>
-    <button onClick={()=>handleMoveToReplay(gameObj.id, 0, gameObj.title)}>Replay</button>  
-     <div></div>
-     <br></br>
-  </div>
-  ) 
-
-  function handleMoveToStart(id, list, name){
-    if(list === 0){
-    handleRemoveWantGame(id)
-      setTimeout(()=>{
-        fetch(`${user.id}/lists/${"Started Playing"}`, {
-          method: "PATCH", 
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            list_id: 1, 
-            title: name
-          })
-        })
-      }, 300)
-      console.log("Removed from Want, added to Start")
-      setTimeout(()=>{
-        checkRender()
-        checkRender1()
-        checkRender2()
-      }, 400)
-    } else {
-    console.log("did not move to start")
-    }  
-    setTimeout(()=>{
-      checkRender()
-      checkRender1()
-      checkRender2()
-    }, 400)
-  }
-
-  function handleMoveToReplay(id, list, name){
-    if(list === 0){
-      handleRemoveWantGame(id)
-      setTimeout(()=>{
-        fetch(`${user.id}/lists/${"To Replay"}`, {
-          method: "PATCH", 
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            list_id: 1, 
-            title: name
-          })
-        })
-      }, 300)
-      setTimeout(()=>{
-        checkRender()
-        checkRender1()
-        checkRender2()
-      }, 400)
-    } else {
-      console.log("Did not Move To Replay")
-    }
-    setTimeout(()=>{
-      checkRender()
-      checkRender1()
-      checkRender2()
-    }, 400)
-  }
-  
   function handleListClick(){
     fetch(`/lists/${user.id}`, {
       method: "POST", 
@@ -138,20 +43,10 @@ function checkRender(){
   }, 250)
   } 
   
-  function checkListRender(){
+   function checkListRender(){
     fetch('/lists')
     .then((r)=>r.json())
     .then((listData)=>setLists(listData))
-  }
-  function checkRender1(){
-    fetch(`${user.id}/lists/${lists[1].id}`)
-    .then((r)=>r.json())
-    .then((data)=>setGames1(data))
-  }
-  function checkRender2(){
-    fetch(`${user.id}/lists/${lists[2].id}`)
-    .then((r)=>r.json())
-    .then((data)=>setGames2(data))
   }
 
   if(lists.length > 0 && count === 0){
@@ -169,8 +64,7 @@ function checkRender(){
       <div >
           <br></br>
         <table class="table">
-          <tbody>
-            <td>{showGames}</td>
+          <tbody>      
             <ListedGames lists={lists} />
           </tbody>
         </table>
