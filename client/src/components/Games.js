@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from '../context/user'
+import GameCard from "./GameCard";
 
 function Games(){
   const { user, loggedIn } = useContext(UserContext);
@@ -24,137 +25,17 @@ function Games(){
 
     const theGames =  gameList.map((gameItem) =>
       <ul key={gameItem.id}>
-        <img src={gameItem.cover_art} alt={gameItem.cover_art}/>
-        <li>{gameItem.title} </li>
-        <li> Platform: {gameItem.platform}</li>
-        <li> Release Date: {gameItem.release_date}</li>
-        <li> Genre: {gameItem.genre}</li>
-        <button onClick={()=>handleWantClick(
-          gameItem.title, 
-          gameItem.platform, 
-          gameItem.release_date, 
-          gameItem.genre
-        )}>Want to Play</button>
-        <button onClick={()=>handleStartClick(
-          gameItem.title, 
-          gameItem.platform, 
-          gameItem.release_date, 
-          gameItem.genre
-        )}>Started Playing</button>
-        <button onClick={()=>handleReplayClick(
-          gameItem.title, 
-          gameItem.platform, 
-          gameItem.release_date, 
-          gameItem.genre
-        )}>To Replay</button>
+        <GameCard
+          key={gameItem.id}
+          img={gameItem.cover_art}
+          title={gameItem.title}
+          platform1={gameItem.platform}
+          platform2={gameItem.platform}
+          released={gameItem.release_date}
+          genre={gameItem.genre}
+       />
       </ul>
     )
-  
-    function handleWantClick(id, name, platform, genre, release_date, cover_art){
-      fetch(`${user.id}/lists/${"Want to Play"}`, {
-        method: "PATCH", 
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          list_id: 1, 
-          title: name,
-          platform: platform,
-          genre: genre,
-          release_date: release_date,
-          cover_art: cover_art
-        })
-      })
-      .then((r)=>{ 
-        if(!r.ok){
-        r.json().then((data)=>console.log("Want list: ",data))
-        //alert("Added to Want List")
-        }
-       else {
-        r.json().then((errorData) => setErrors(errorData.errors))
-        //alert("Already Added to List") 
-        }
-      });
-      hideWant(id)
-    }
-
-    function hideWant(id){
-      console.log("RG: ", rawgGames.id)
-      setShowStart(true)
-      setShowReplay(true)
-      setShowWant(false);
-      //{showWant ? console.log("1",showWant) : console.log("false", id)}
-      checkRender();
-    } 
-
-    function handleStartClick(id, name, platform, genre, release_date){
-      fetch(`${user.id}/lists/${"Started Playing"}`, {
-        method: "PATCH", 
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          list_id: 1, 
-          title: name,
-          platform: platform,
-          genre: genre,
-          release_date
-        })
-      })
-      .then((r)=>{ 
-        if(!r.ok){
-        r.json().then((data)=>console.log("Start list: ",data))
-        //alert("Added to Started List")
-        }
-       else {
-        r.json().then((errorData) => setErrors(errorData.errors))
-        //alert("Already Added to List")
-      }
-      });
-      hideStart(id)
-    }
-
-    function hideStart(id){
-      setShowStart(false)
-      setShowReplay(true)
-      setShowWant(true);
-      //{showWant ? console.log("1",showWant) : console.log("false", id)}
-      checkRender();
-    } 
-
-    function handleReplayClick(id, name, platform, genre, release_date){
-      fetch(`${user.id}/lists/${"To Replay"}`, {
-        method: "PATCH", 
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          list_id: 1, 
-          title: name,
-          platform: platform,
-          genre: genre,
-          release_date
-        })
-      })
-      .then((r)=>{ 
-        if(!r.ok){
-        r.json().then((data)=>console.log("Replay list: ",data))
-          //alert("Added to Replay List")
-      } else {
-        r.json().then((errorData) => setErrors(errorData.errors))
-       // alert("Already Added to List")  
-      }
-      });
-      hideReplay(id)
-    }
-
-    function hideReplay(id){
-      setShowStart(true)
-      setShowReplay(false)
-      setShowWant(true);
-      //{showWant ? console.log("1",showWant) : console.log("false", id)}
-      checkRender();
-    } 
 
     function checkRender(){
       fetch('https://api.rawg.io/api/games?key=c8ab624f5d4247418c0a9614841a0791')
@@ -166,46 +47,16 @@ function Games(){
     useEffect(()=>{
       setTimeout (() => {
        setTheRawgGames(rawgGames.map((rawgData) => 
-        <ul key={rawgData.id} >
-          <img src={rawgData.background_image} alt={rawgData.background_image}/>
-          <li>{rawgData.name}</li>   
-          <li>Platform: {rawgData.parent_platforms[0].platform.name}</li>
-          <li>/ {rawgData.parent_platforms[1].platform.name}</li>
-          <li>Release Date: {rawgData.released}</li>
-          <li>Genre: {rawgData.genres[0].name}</li>
- 
-          {showWant ? 
-          <button 
-            key={rawgData.id}
-            onClick={() => handleWantClick(
-            rawgData.id,
-            rawgData.name,
-            rawgData.parent_platforms[0].platform.name,
-            rawgData.genres[0].name,
-            rawgData.released,
-            rawgData.background_image
-            )}>Want to Play</button>
-            :" "}
-
-          {showStart ?   
-          <button onClick={()=>handleStartClick(
-            rawgData.id,
-            rawgData.name,
-            rawgData.parent_platforms[0].platform.name,
-            rawgData.genres[0].name,
-            rawgData.released,
-          )}>Started Playing</button>
-          :" "}
-
-          {showReplay ?
-          <button onClick={()=>handleReplayClick(
-            rawgData.id,
-            rawgData.name,
-            rawgData.parent_platforms[0].platform.name,
-            rawgData.genres[0].name,
-            rawgData.released,
-          )}>To Replay</button>
-          :" "}
+        <ul>
+       <GameCard
+          key={rawgData.id}
+          img={rawgData.background_image}
+          title={rawgData.name}
+          platform1={rawgData.parent_platforms[0].platform.name}
+          platform2={rawgData.parent_platforms[1].platform.name}
+          released={rawgData.released}
+          genre={rawgData.genres[0].name}
+       />
         </ul>)) 
       },25) 
     }, [rawgGames])
