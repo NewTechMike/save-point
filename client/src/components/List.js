@@ -9,6 +9,7 @@ function List(){
   const [gameCount, setGameCount] = useState(0)
   const [count, setCount] = useState(0)
   const [gen, setGen] = useState(false)
+  const [forceRender, setForceRender] = useState([])
   
   useEffect(()=>{
     fetch('/lists')
@@ -48,15 +49,18 @@ function checkRender(){
   <div >   
     <li key={"a"+gameObj.id}>{gameObj.title}{" "}</li>
     <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button>
-    <button onClick={()=>handleMoveToStart(gameObj.id, 1, gameObj.title)}>S</button>
-    <button onClick={()=>handleMoveToReplay(gameObj.id, 1, gameObj.title)}>R</button>  
+    <button 
+      style={{flexDirection: "row" ,marginLeft: 20}} 
+      onClick={()=>handleMoveToStart(gameObj.id, 0, gameObj.title)}>
+        Started</button>
+    <button onClick={()=>handleMoveToReplay(gameObj.id, 0, gameObj.title)}>Replay</button>  
      <div></div>
      <br></br>
   </div>
   ) 
 
   function handleMoveToStart(id, list, name){
-    if(list === 1){
+    if(list === 0){
     handleRemoveWantGame(id)
       setTimeout(()=>{
         fetch(`${user.id}/lists/${"Started Playing"}`, {
@@ -69,19 +73,42 @@ function checkRender(){
             title: name
           })
         })
-      }, 1000)
+      }, 300)
       console.log("Removed from Want, added to Start")
-    } else {
-    console.log("did not move")
-    }
-    setTimeout(()=>{
       checkRender()
-    }, 250)
-  }
-  function handleMoveToReplay(){
-    console.log("Move To Replay")
+    } else {
+    console.log("did not move to start")
+    }
+    setForceRender([...forceRender, 0])
+    /* checkRender()
+    setTimeout(()=>{
+    }, 250) */
   }
 
+  function handleMoveToReplay(id, list, name){
+    if(list === 0){
+      handleRemoveWantGame(id)
+      setTimeout(()=>{
+        fetch(`${user.id}/lists/${"To Replay"}`, {
+          method: "PATCH", 
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            list_id: 1, 
+            title: name
+          })
+        })
+      }, 300)
+      checkRender()
+    } else {
+      console.log("Did not Move To Replay")
+    }
+
+    //checkRender()
+    /* setTimeout(()=>{
+    }, 250) */
+  }
   
   function handleListClick(){
     fetch(`/lists/${user.id}`, {

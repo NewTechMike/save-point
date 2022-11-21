@@ -79,6 +79,7 @@ function Games(){
     }
 
     function hideWant(id){
+      console.log("RG: ", rawgGames.id)
       setShowStart(true)
       setShowReplay(true)
       setShowWant(false);
@@ -175,6 +176,7 @@ function Games(){
  
           {showWant ? 
           <button 
+            key={rawgData.id}
             onClick={() => handleWantClick(
             rawgData.id,
             rawgData.name,

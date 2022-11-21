@@ -51,8 +51,11 @@ function ListedGames({lists}){
   <div style={{paddingLeft: "4rem"}}>
     <li key={gameObj.id} >{gameObj.title}</li>
     <button onClick={()=>handleRemoveStartGame(gameObj.id)}>X</button>
-    <button onClick={()=>handleMoveToWant(gameObj.id, 1, gameObj.title)}>W</button>
-    <button onClick={()=>handleMoveToReplay(gameObj.id, 1, gameObj.title)}>R</button>  
+    <button 
+      style={{flexDirection: "row" ,marginLeft: 20}} 
+      onClick={()=>handleMoveToWant(gameObj.id, 1, gameObj.title)}>
+        Want</button>
+    <button onClick={()=>handleMoveToReplay(gameObj.id, 1, gameObj.title)}>Replay</button>  
     <div></div>
     <br></br>
   </div>
@@ -81,16 +84,6 @@ function ListedGames({lists}){
       checkRender()
     }, 250)
   }
-  const showGames = games.map((gameObj) => 
-  <div >   
-    <li key={"a"+gameObj.id}>{gameObj.title}{" "}</li>
-    <button onClick={()=>handleRemoveWantGame(gameObj.id)}>X</button>
-    <button onClick={()=>handleMoveToStart(gameObj.id)}>S</button>
-    <button onClick={()=>handleMoveToReplay(gameObj.id)}>R</button>  
-     <div></div>
-     <br></br>
-  </div>
-  ) 
 
   function handleMoveToWant(id, list, name){
     if(list === 2){
@@ -107,6 +100,7 @@ function ListedGames({lists}){
           })
         })
       }, 300)
+      checkRender()
       console.log("Removed from Replay, added to Want")
     } else {
       handleRemoveStartGame(id);
@@ -123,15 +117,15 @@ function ListedGames({lists}){
         })
       }, 300)
       console.log("Removed from Start, added to Want")
+      checkRender()
     }
-    setForceRender([...forceRender, 0])
+    /* setForceRender([...forceRender, 0])
     console.log("It's been Moved to Want")
     setTimeout(()=>{
       console.log("Timeout is hit")
-      checkRender()
       checkRender1()
       checkRender2()
-    }, 300)
+    }, 300) */
   }
 
   function checkRender(){
@@ -157,6 +151,7 @@ function ListedGames({lists}){
         })
       }, 300)
       console.log("Removed from Replay, added to Start")
+      checkRender()
     } else {
       handleRemoveWantGame(id)
       setTimeout(()=>{
@@ -172,28 +167,48 @@ function ListedGames({lists}){
         })
       }, 300)
       console.log("Removed from Want, added to Start")
-
+      checkRender()
     }
+    setGames1(games1)
+    checkRender1()
     setForceRender([...forceRender, 0])
+    /* setForceRender([...forceRender, 0])
     setTimeout(()=>{
       checkRender()
-      checkRender1()
       checkRender2()
-    }, 300)
+    }, 300) */
   }
 
-
-
-  function handleMoveToReplay(){
-    console.log("Move To Replay")
+  function handleMoveToReplay(id, list, name){
+    if(list === 1){
+    handleRemoveStartGame(id)
+      setTimeout(()=>{
+        fetch(`${user.id}/lists/${"To Replay"}`, {
+          method: "PATCH", 
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            list_id: 1, 
+            title: name
+          })
+        })
+      }, 300)
+      checkRender()
+    } else { 
+      console.log("Did not Move To Replay")
+    }
   }
 
   const showGames2 = games2.map((gameObj)=>
     <div className = "ReplayList" style={{paddingLeft: "14rem"}}>
       <li key={gameObj.id} >{gameObj.title}</li>
       <button  onClick={()=>handleRemoveReplayGame(gameObj.id)}>X</button>
-      <button  onClick={()=>handleMoveToWant(gameObj.id, 2, gameObj.title)}>W</button>
-      <button  onClick={()=>handleMoveToStart(gameObj.id, 2, gameObj.title)}>S</button>    
+      <button  
+        style={{flexDirection: "row" ,marginLeft: 20}} 
+        onClick={()=>handleMoveToWant(gameObj.id, 2, gameObj.title)}>
+          Want</button>
+      <button  onClick={()=>handleMoveToStart(gameObj.id, 2, gameObj.title)}>Started</button>    
       <div></div>
       <br></br>
     </div>
@@ -208,6 +223,7 @@ function ListedGames({lists}){
           <td>{showGames2}</td>
         </tbody>
       </table> 
+    <div>{forceRender}</div>
     </div>
   )
 }
