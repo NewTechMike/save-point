@@ -11,6 +11,7 @@
   - Create and edit a bio
   - Add video games to any three generated lists 
   - Be able to add to or delete items from said list
+  - Able to move games from one list to another
 
 # Deployed
 * The app has been deployed on heroku at https://save--point.herokuapp.com/
@@ -62,7 +63,10 @@ nvm alias default 16
 npm i -g npm
 ```
 
-#Resources
+# Resources
 - Image source from : [dribbble.com]
+- Games API soruce from : [rawg.io]
 
 [dribbble.com]: https://dribbble.com/shots/3159371-Video-Game-Controller-Background/attachments/9678968?mode=media
+
+[rawg.io]: https://rawg.io
