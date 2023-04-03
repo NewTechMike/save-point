@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL']%>
   database: save_point_production
   username: save_point
   password: <%= ENV["SAVE_POINT_DATABASE_PASSWORD"] %>

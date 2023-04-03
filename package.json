@@ -12,6 +12,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "bundle": "^2.1.0",
     "serve": "^6.5.8"
   }
 }
