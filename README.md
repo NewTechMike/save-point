@@ -14,7 +14,7 @@
   - Able to move games from one list to another
 
 # Deployed
-* The app has been deployed on heroku at https://save--point.herokuapp.com/
+* Coming soon
 
 # Setup and Installation
 ## Repository 
