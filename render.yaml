@@ -1,18 +1,18 @@
 databases:
-  - name: mysite
-    databaseName: mysite
+  - name: save-point
+    databaseName: save-point
     user: mysite
 
 services:
   - type: web
-    name: mysite
+    name: save-point
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite
+          name: save-point
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
