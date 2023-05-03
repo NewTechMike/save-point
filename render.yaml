@@ -1,7 +1,7 @@
 databases:
   - name: save-point
-    databaseName: save-point
-    user: save-point
+    databaseName: save point
+    user: save point
 
 services:
   - type: web
