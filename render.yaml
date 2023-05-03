@@ -1,6 +1,6 @@
 databases:
   - name: save-point
-    databaseName: save point
+    databaseName: example-project
     user: save point
 
 services:
