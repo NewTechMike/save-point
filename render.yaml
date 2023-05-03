@@ -1,7 +1,7 @@
 databases:
-  - name: save-point
-    databaseName: example-project
-    user: save point
+  - name: mysite
+    databaseName: mysite
+    user: mysite
 
 services:
   - type: web
