@@ -1,7 +1,7 @@
 databases:
   - name: save-point
     databaseName: save-point
-    user: mysite
+    user: save-point
 
 services:
   - type: web
@@ -10,7 +10,7 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
-      - key: http://localhost:3000
+      - key: DATABASE_URL
         fromDatabase:
           name: save-point
           property: connectionString
