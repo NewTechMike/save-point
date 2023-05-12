@@ -26,7 +26,7 @@ function List(){
     .then((data)=>setGames(data))
     setGameCount(1)
   }
-
+//added comment
   function handleListClick(){
     fetch(`/lists/${user.id}`, {
       method: "POST", 
